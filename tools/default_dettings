@@ -1,0 +1,12 @@
+a=com.huuuge.casino.slots
+b=com.huuuge.casino.slott
+c=com.huuuge.stars.slots
+d=com.playstudios.popslots
+e=com.akoztech.vmcasino
+f=com.bagelcode.slots1
+g=slots.hot.vegas.casino.games.free
+h=com.grapegaming.slotsgrape
+i=com.zynga.livepoker
+j=com.grapegaming.slotsgrapf
+DEFAULT_GAME=$a
+GAME_DATA_ACKUP_FOLDER_PATH=/data/data/com.termux/files/home/huuuge_casino_tool/tools/_hc_data_

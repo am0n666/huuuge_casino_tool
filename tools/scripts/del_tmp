@@ -1,0 +1,6 @@
+del_tmp()
+{
+source `pwd`/.settings
+
+rm -f $TEMP_FILES_PATH/*
+}

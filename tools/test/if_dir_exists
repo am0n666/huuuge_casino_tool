@@ -1,0 +1,16 @@
+if_dir_exists()
+{
+source `pwd`/.settings
+
+if [ -d "$1" ]
+then
+	if [ -e "$1" ]
+	then
+		echo 1
+	else
+		echo 0
+	fi
+else
+	echo 0
+fi
+}

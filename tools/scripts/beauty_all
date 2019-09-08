@@ -1,0 +1,46 @@
+beauty_all()
+{
+source `pwd`/.settings
+
+BEAUTYFULL=$WORK_DIR/_beautyfull_
+BEAUTYFULL_TESTS=$BEAUTYFULL/tools/test
+BEAUTYFULL_SCRIPTS=$BEAUTYFULL/tools/scripts
+
+clear
+echo "Please wait."
+echo
+
+rm -Rf $BEAUTYFULL
+
+mkdir -p $BEAUTYFULL_TESTS
+mkdir -p $BEAUTYFULL_SCRIPTS
+
+TESTS=$WORK_DIR/tools/test
+SCRIPTS=$WORK_DIR/tools/scripts
+
+for i in $WORK_DIR/* ; do
+[[ -f "$i" ]] || continue
+filename=$(basename "$i")
+fname="${filename%.*}"
+beauty.sh $i $BEAUTYFULL/$filename
+done
+
+for i in $TESTS/* ; do
+[[ -f "$i" ]] || continue
+filename=$(basename "$i")
+fname="${filename%.*}"
+beauty.sh $i $BEAUTYFULL_TESTS/$filename
+done
+
+for i in $SCRIPTS/* ; do
+[[ -f "$i" ]] || continue
+filename=$(basename "$i")
+fname="${filename%.*}"
+beauty.sh $i $BEAUTYFULL_SCRIPTS/$filename
+done
+
+echo
+echo "All ok"
+echo
+
+}

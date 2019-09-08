@@ -1,0 +1,134 @@
+count_bkps() {
+	source `pwd`/.settings
+	source `pwd`/tools/test/convert_path
+	tdir=$(convert_path "$1")
+	TARGET_DIR="$tdir"
+	count=0
+	for f in $TARGET_DIR/*
+	do
+		extension="${f##*.}"
+		if [ $extension == "tar" ]
+		then
+			count=$(command expr $count + 1)
+		fi
+	done
+	echo $count
+}
+
+get_options()
+{
+source `pwd`/.settings
+
+PDIR=$1
+
+count=0
+
+for file in $PDIR/*
+do
+	count=$(command expr $count + 1)
+	filename=$(basename "$file")
+	fname="${filename%.*}"
+	if [[ -d $file ]]
+	then
+		bkpscnt="["`count_bkps $file`"]."
+		echo $count "<DIR>"$bkpscnt"$filename" >> $TEMP_FILES_PATH/restopts.$$
+	fi
+	if [[ -f $file ]]; then
+		echo $count "$fname" >> $TEMP_FILES_PATH/restopts.$$
+	fi
+done
+
+OPTIONS=(
+`cat $TEMP_FILES_PATH/restopts.$$`
+)
+
+LRF=$PDIR/.last_restored
+
+if [ ! -e $LRF ]
+then
+	MM_TITLE="Last restored : BRAK"
+else
+	MM_TITLE="Last restored : "`cat $LRF`
+fi
+
+}
+
+get_selected_profile_name()
+{
+count=0
+for f in $1/*
+do
+	count=$(command expr $count + 1)
+	filename=$(basename "$f")
+	fname="${filename%.*}"
+	if [ "$2" = "$count" ]
+	then
+		#			echo $fname > $TEMP_FILES_PATH/loaded_profile.$$
+		echo $fname #> $WORK_DIR/loaded_profile.$$
+	fi
+done
+}
+
+restore_dialog()
+{
+source `pwd`/.settings
+source $TESTS_DIR/if_dir_exists
+source $SCRIPTS_DIR/restore_profile
+source $SCRIPTS_DIR/cnt_files
+source $TESTS_DIR/convert_path
+
+
+if [ -n "$1" ]
+then
+	_PDIR=$(convert_path "$1")
+
+	SF=`if_dir_exists $_PDIR`
+	
+	if [ $SF == 0 ]
+	then
+		dialog $dlg_begin \
+		--backtitle "$DIALOG_BACKGROUND_TITLE" \
+		--title "Error" \
+		--clear \
+		--msgbox "Dir: $_PDIR not found" 10 $DLGSZER
+		clear
+		exit 0
+	else
+		
+		FCOUNT=`cnt_files $_PDIR`
+		if [ $FCOUNT == 0 ]
+		then
+			clear
+			echo "No backups found in th this folder."
+			exit 0
+		fi
+		
+		get_options $_PDIR
+
+		LINES_COUNT=`count_lines_4_dialog "$_PDIR"`
+
+		dialog  $dlg_begin --clear \
+		--backtitle "$DIALOG_BACKGROUND_TITLE" \
+		--title "$MM_TITLE" \
+		--menu "Use [UP/DOWN] key to move" $LINES_COUNT $DLGSZER \
+		16 "${OPTIONS[@]}" 2> $TEMP_FILES_PATH/menuchoices.$$		
+		retopt=$?
+		choice=`cat $TEMP_FILES_PATH/menuchoices.$$`
+		
+		if [ -n "$choice" ]
+		then
+			PNAME=$(get_selected_profile_name $_PDIR $choice)
+			
+			if [ -d $PDIR/$PNAME ]
+			then
+				./menu restore_dialog $PDIR/$PNAME
+			else
+				restore_profile $_PDIR $PNAME
+			fi
+		else
+			clear
+		fi
+	fi
+fi
+}
+

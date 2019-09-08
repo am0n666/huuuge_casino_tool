@@ -1,0 +1,83 @@
+get_next_profile_name()
+{
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		CURRENT_PROFILE=$1
+		CURR=$CURRENT_PROFILE
+		LN=$(echo "${#CURR}")
+
+		if [ $LN == 1 ]
+		then
+			result=0`echo $CURRENT_PROFILE`
+		else
+			result=$CURRENT_PROFILE
+		fi
+		echo $result
+	fi
+}
+
+restore_next()
+{
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		BKPS_DIR=$(convert_path "$1")
+		LR=$(cat "$BKPS_DIR/.last_restored")
+		ONE=1
+		c=`expr $LR + $ONE`
+		PNAME=$(get_next_profile_name $c)
+
+		if [ -f "$BKPS_DIR/$PNAME.tar" ]
+		then
+			restore_profile "$BKPS_DIR" $PNAME
+		else
+			echo "No more profiles in this directory"
+		fi
+	fi
+}
+
+restore_from_path()
+{
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		BKPS_DIR=$(convert_path "$1")
+		LR=$(cat "$BKPS_DIR/.last_restored")
+#		ONE=1
+#		c=`expr $LR + $ONE`
+		PNAME=$2
+
+		if [ -f "$BKPS_DIR/$PNAME.tar" ]
+		then
+			restore_profile "$BKPS_DIR" $PNAME
+		else
+			echo "No more profiles in this directory"
+		fi
+	fi
+}
+
+restore_next_n_start()
+{
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		BKPS_DIR=$(convert_path "$1")
+		LR=$(cat "$BKPS_DIR/.last_restored")
+		ONE=1
+		c=`expr $LR + $ONE`
+		PNAME=$(get_next_profile_name $c)
+
+		if [ -f "$BKPS_DIR/$PNAME.tar" ]
+		then
+			restore_profile "$BKPS_DIR" $PNAME
+			start_game
+		else
+			echo "No more profiles in this directory"
+		fi
+	fi
+}

@@ -1,0 +1,16 @@
+cnt_files()
+{
+source `pwd`/.settings
+
+TARGET_DIR=$1
+#OLDPWD=$PWD
+#cd $TARGET_DIR
+
+#COUNT=`ls *.tar -l | wc -l`
+
+COUNT=`find $TARGET_DIR -type f -name "*.tar" | wc -l`
+
+
+echo $COUNT
+#cd $OLDPWD
+}

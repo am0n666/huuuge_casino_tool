@@ -1,0 +1,133 @@
+set_profile_name()
+{
+	source `pwd`/.settings
+
+	if [ -z $1 ]
+	then
+	exit 0
+	fi
+
+	CLUB_SETTINGS=$WORK_DIR/.clubs
+	CLE=`if_file_exists $CLUB_SETTINGS`
+	if [ $CLE == 1 ]
+	then
+		source $CLUB_SETTINGS
+
+		CURRENT_PROFILE=$1
+		CURR=$CURRENT_PROFILE
+		LN=$(echo "${#CURR}")
+
+		if [ $LN == 1 ]
+		then
+			result=0`echo $CURRENT_PROFILE`
+		else
+			result=$CURRENT_PROFILE
+		fi
+		echo $result
+	fi
+}
+
+count_profiles_in_current_club()
+{
+	source `pwd`/.settings
+
+	CLUB_SETTINGS=$WORK_DIR/.clubs
+	CLE=`if_file_exists $CLUB_SETTINGS`
+	if [ $CLE == 1 ]
+	then
+		source $CLUB_SETTINGS
+		CCLUB_DIR=$WORK_DIR/_club`echo $CURRENT_CLUB`_
+
+		for file in "${CCLUB_DIR-.}"/*; do
+		[ -f "${file}" ] && ((files++))
+	done
+	FILECOUNT=${files-0}
+
+	echo $FILECOUNT
+fi
+}
+
+backup_cp_n_clean()
+{
+source `pwd`/.settings
+source $TESTS_DIR/if_file_exists
+source $TESTS_DIR/if_dir_exists
+source $SCRIPTS_DIR/backup_profile
+source $SCRIPTS_DIR/clean
+
+
+CLUB_SETTINGS=$WORK_DIR/.clubs
+CLE=`if_file_exists $CLUB_SETTINGS`
+
+if [ $CLE == 1 ]
+then
+source $CLUB_SETTINGS
+CURR_CLUB_DIR=$WORK_DIR/_club`echo $CURRENT_CLUB`_
+
+CURR_PROFILES_COUNT=`count_profiles_in_current_club`
+
+NEW_PNAME=$(expr `count_profiles_in_current_club` + 1)
+NEW_PNAME=$(set_profile_name $NEW_PNAME)
+
+BKP_PATH=$CURR_CLUB_DIR
+BKP_FILE=$NEW_PNAME
+
+if [ $CURR_PROFILES_COUNT -lt 15 ]
+then
+	backup_profile $BKP_PATH $BKP_FILE
+	
+if [ $NEW_PNAME != 15 ]
+then
+clean_profile
+fi
+	
+	#          echo "" > $BKP_PATH
+	
+	
+	echo "Backup $NEW_PNAME created."
+	if [ $NEW_PNAME == 15 ]
+	then
+		echo "Club NR: `echo $CURRENT_CLUB` is finished"
+	fi
+fi
+fi
+}
+
+create_club()
+{
+source `pwd`/.settings
+source $TESTS_DIR/if_file_exists
+source $TESTS_DIR/if_dir_exists
+source $SCRIPTS_DIR/search_replace_in_file
+
+CLUB_SETTINGS=$WORK_DIR/.clubs
+CLE=`if_file_exists $CLUB_SETTINGS`
+
+if [ $CLE == 0 ]
+then
+echo "###########" > $CLUB_SETTINGS
+echo "#  CLUBS  #" >> $CLUB_SETTINGS
+echo "###########" >> $CLUB_SETTINGS
+echo "" >> $CLUB_SETTINGS
+echo "CLUBS_COUNT=1" >> $CLUB_SETTINGS
+echo "CURRENT_CLUB=1" >> $CLUB_SETTINGS
+echo "" >> $CLUB_SETTINGS
+
+source $CLUB_SETTINGS
+
+mkdir $WORK_DIR/_club`echo $CURRENT_CLUB`_
+
+else
+source $CLUB_SETTINGS
+CC=$(expr `echo $CLUBS_COUNT` + 1)
+search_replace_in_file $CLUB_SETTINGS CLUBS_COUNT=$CLUBS_COUNT CLUBS_COUNT=$CC
+search_replace_in_file $CLUB_SETTINGS CURRENT_CLUB=$CURRENT_CLUB CURRENT_CLUB=$CC
+
+source $CLUB_SETTINGS
+
+mkdir $WORK_DIR/_club`echo $CURRENT_CLUB`_
+fi
+
+source $SCRIPTS_DIR/clean
+clean_profile
+}

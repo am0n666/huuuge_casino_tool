@@ -1,0 +1,25 @@
+function get_func()
+{
+	source `pwd`/.settings
+
+	EXCLUDE=$(basename ${BASH_SOURCE[0]})
+
+	TESTS=`pwd`/tools/test
+	SCRIPTS=`pwd`/tools/scripts
+
+	for i in $TESTS_DIR/* ; do
+		[[ -f "$i" ]] || continue
+		if [ $i != "$TESTS_DIR/$EXCLUDE" ]
+	then
+		source $i
+	fi
+	done
+
+	for i in $SCRIPTS_DIR/* ; do
+		[[ -f "$i" ]] || continue
+		if [ $i != "$SCRIPTS_DIR/$EXCLUDE" ]
+		then
+			source $i
+		fi
+	done
+}

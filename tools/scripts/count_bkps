@@ -1,0 +1,18 @@
+count_bkps()
+{
+source `pwd`/.settings
+
+TARGET_DIR=$1
+#cd $TARGET_DIR
+
+count=0
+for f in $TARGET_DIR/*
+do
+	extension="${f##*.}"
+	if [ $extension == "tar" ]
+	then
+		count=$(command expr $count + 1)
+	fi
+done
+echo $count
+}

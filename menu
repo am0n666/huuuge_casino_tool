@@ -1,0 +1,86 @@
+#!/system/xbin/bash
+
+is_root()
+{
+	if [ "$(id -u)" == "0"  ]; then
+		[ "$1" != "q" ] && echo 1
+	else
+		[ "$1" != "q" ] && echo 0
+	fi
+}
+
+ROOTU=$(is_root)
+
+if [ $ROOTU = 0 ]
+then
+	echo "Root permissions required"
+	echo
+	exit 0
+fi
+
+dir_list=( tools/test tools/scripts )
+error_found=0
+
+for check_dir in ${dir_list[@]}
+do
+	if [ ! -e $check_dir ]
+	then
+		clear
+		echo "Error: folder not found '$check_dir'"
+		error_found=1
+	fi
+done
+
+if [ ! -e profiles ]
+then
+	mkdir profiles
+	chmod 0700 profiles
+fi
+
+if [ ! -e tmp ]
+then
+	mkdir tmp
+	chmod 7777 tmp
+fi
+
+if [ $error_found == 1 ]
+then
+	echo
+	echo "Required files are missing!."
+	exit 0
+fi
+
+#clear
+
+chmod 0755 tools/scripts/*
+chmod 0755 tools/test/*
+chmod 0755 tools/completion/*
+
+
+
+source tools/scripts/get_functions && get_functions && check_settings
+
+source .settings
+
+if [ "$GAME_INSTALLED" == "0" ]
+then
+	echo
+	echo "Please, install game first!"
+	echo
+	rm .settings
+	exit
+fi
+
+check_completion
+
+. $PREFIX/etc/bash_completion.d/hcgu-completion.bash
+
+trap 'del_tmp' EXIT # calls deletetempfiles function on exit
+
+source `pwd`/.variables
+
+"$@"
+
+
+
+

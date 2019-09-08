@@ -1,0 +1,2 @@
+cd /data/data/com.termux/files/home/huuuge_casino_tool
+./move last_restored_plus_one "$1"

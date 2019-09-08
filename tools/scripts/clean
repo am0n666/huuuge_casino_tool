@@ -1,0 +1,50 @@
+clean_cache()
+{
+	source `pwd`/.settings
+	source $install_dir/tools/default_dettings
+	source $TESTS_DIR/if_dir_exists
+	
+	GCDE=`if_dir_exists $GAME_CACHE_DIR`
+	
+	if [ $GCDE == 1 ]
+	then
+		rm -Rf $GAME_CACHE_DIR
+	fi
+	clear
+}
+
+clean_profile()
+{
+	source `pwd`/.settings
+	source $SCRIPTS_DIR/kill_game
+	source $TESTS_DIR/if_dir_exists
+	source $TESTS_DIR/if_file_exists
+	
+	kill_game
+	
+	BACKUP_FILE_PATH=$WORK_DIR/tools/other/default_profile.tar
+	TARGET_DIR_PATH=$GAME_DIR
+	
+	BFE=`if_file_exists $BACKUP_FILE_PATH`
+	TDE=`if_dir_exists $TARGET_DIR_PATH`
+	
+	if [ $BFE == 1 ]
+	then
+		if [ $TDE == 1 ]
+		then
+			cd $TARGET_DIR_PATH
+			rm -Rf *
+			(pv -n $BACKUP_FILE_PATH | tar xf - -C $TARGET_DIR_PATH ) 2>&1 | dialog --gauge "Przywracanie..." 6 50
+			rm -f $GAME_DIR/files/save/paks
+			rm -f $GAME_DIR/files/save/trpaks
+			if [ -f $GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar ]; then
+				tar xf $GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar -C $GAME_DIR
+			fi
+			chown -R $GAME_USER:$GAME_USER $GAME_DIR
+			clean_cache
+			cd $WORK_DIR
+		fi
+	fi
+	clear
+	echo "Profile cleaned."
+}

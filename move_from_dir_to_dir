@@ -1,0 +1,2 @@
+cd /data/data/com.termux/files/home/huuuge_casino_tool
+./move move_from_dir_to_dir "$1" "$2"

@@ -1,0 +1,21 @@
+#!/system/xbin/bash
+
+SIZE=`resize`
+_MAXCOL="`echo $SIZE | busybox sed 's,;e.*,,'`"
+__MAXCOL="`echo $_MAXCOL | busybox sed 's,;L.*,,'`"
+MAXCOL=`echo $__MAXCOL | sed -e 's/'COLUMNS='/''/g'`
+
+
+_MAXLIN="`echo $SIZE | busybox sed 's,;e.*,,'`"
+__MAXLIN=COLUMNS=$MAXCOL";"
+___MAXLIN=`echo $_MAXLIN | sed -e 's/'"$__MAXLIN"'/''/g'`
+MAXLIN=`echo $___MAXLIN | sed -e 's/'LINES='/''/g'`
+
+# TOP
+BY=5
+# LEFT
+BX=5
+
+export dlg_begin="--begin $BY $BX"
+
+export DLGSZER=`expr $MAXCOL - 10`

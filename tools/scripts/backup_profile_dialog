@@ -1,0 +1,52 @@
+backup_profile_dialog()
+{
+source `pwd`/.settings
+source $SCRIPTS_DIR/kill_game
+source $TESTS_DIR/if_dir_exists
+source $TESTS_DIR/if_file_exists
+
+LRF=$PROFILES_DIR/.last_backuped
+
+if [ ! -e $LRF ]
+then
+	MM_TITLE="Last backuped : BRAK"
+else
+	MM_TITLE="Last backuped : "`cat $LRF`
+fi
+
+dialog \
+--clear  $dlg_begin \
+--backtitle "$DIALOG_BACKGROUND_TITLE" \
+--title "$MM_TITLE" \
+--inputbox "Enter profile name:  " \
+10 $DLGSZER 2>$TEMP_FILES_PATH/bkppname.$$
+
+TARGET_DIR=$PROFILES_DIR
+PNAME=`cat $TEMP_FILES_PATH/bkppname.$$`
+
+if [ -n "$PNAME" ]
+then
+	PBFE=`if_file_exists $TARGET_DIR/$PNAME.tar`
+	
+	kill_game
+	
+	if [ $PBFE == 1 ]; then rm $TARGET_DIR/PNAME.tar; fi
+	SIZE=`du -sk $GAME_DIR | cut -f 1`
+	cd $GAME_DIR
+
+	if [ -f "$GAME_DIR/files/_ha_hc_slots_prod.db" ]; then
+		rm -f "$GAME_DIR/files/_ha_hc_slots_prod.db"
+	fi
+	if [ -d "$GAME_DIR/files/adc/media" ]; then
+		rm -Rf "$GAME_DIR/files/adc/media"
+	fi
+	
+	(tar cfP - * | pv -n -s ${SIZE}k > $TARGET_DIR/$PNAME.tar) 2>&1 | dialog --gauge 'Progress' 6 50
+	echo $PNAME > $TARGET_DIR/.last_backuped
+	cd $WORK_DIR
+	clear
+	#  else
+	#      echo "You must type profile name!"
+fi
+clear
+}

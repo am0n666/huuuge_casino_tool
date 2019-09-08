@@ -1,0 +1,11 @@
+kill_game()
+{
+source `pwd`/.settings
+
+grep_output=`busybox pgrep $GAME_NAME`
+
+if [ -n "$grep_output" ];
+then
+	kill -9 $grep_output
+fi
+}

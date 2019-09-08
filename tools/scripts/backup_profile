@@ -1,0 +1,131 @@
+get_profile_id()
+{
+	source `pwd`/.settings
+
+	ID_FROM_FILE=`cat $GAME_DIR/files/breakpad/data`
+	RESULT_ID=$(echo "$ID_FROM_FILE" | awk -F"[" '{print $2}' | awk -F"]" '{print $1}')
+	echo $RESULT_ID
+}
+
+backup_profile()
+{
+source `pwd`/.settings
+source $SCRIPTS_DIR/kill_game
+source $TESTS_DIR/if_dir_exists
+source $TESTS_DIR/if_file_exists
+
+kill_game
+
+TARGET_DIR=$1
+PNAME=$2
+if [ -n "$PNAME" ]
+then
+	PBFE=`if_file_exists $TARGET_DIR/$PNAME.tar`
+	
+	if [ $PBFE == 1 ]; then rm $TARGET_DIR/PNAME.tar; fi
+	SIZE=`du -sk $GAME_DIR | cut -f 1`
+	cd $GAME_DIR
+	if [ -f "$GAME_DIR/files/_ha_hc_slots_prod.db" ]; then
+		rm -f "$GAME_DIR/files/_ha_hc_slots_prod.db"
+	fi
+	if [ -d "$GAME_DIR/files/adc/media" ]; then
+		rm -Rf "$GAME_DIR/files/adc/media"
+	fi
+	(tar cfP - * | pv -n -s ${SIZE}k > $TARGET_DIR/$PNAME.tar) 2>&1 | dialog --gauge 'Progress' 6 50
+#	tar cfP $TARGET_DIR/$PNAME.tar
+	echo $PNAME > $TARGET_DIR/.last_backuped
+	cd $WORK_DIR
+#	clear
+else
+	echo "You must type profile name!"
+fi
+}
+
+backup_next_n_start()
+{
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		BKPS_DIR=$(convert_path "$1")
+		if [ ! -f "$BKPS_DIR/.last_backuped" ]; then
+			LR=0
+		else
+				LR=$(cat "$BKPS_DIR/.last_backuped")
+		fi
+		ONE=1
+		c=`expr $LR + $ONE`
+		PNAME=$(get_next_profile_name $c)
+
+		get_profile_id >> $BKPS_DIR/._ids_
+		backup_profile "$BKPS_DIR" $PNAME
+		clean_profile
+		clear
+		print_success $(cat $BKPS_DIR/.last_backuped)
+		start_game
+	fi
+}
+
+backup_next()
+{
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		BKPS_DIR=$(convert_path "$1")
+		if [ ! -f "$BKPS_DIR/.last_backuped" ]; then
+			LR=0
+		else
+				LR=$(cat "$BKPS_DIR/.last_backuped")
+		fi
+		ONE=1
+		c=`expr $LR + $ONE`
+		PNAME=$(get_next_profile_name $c)
+
+		get_profile_id >> $BKPS_DIR/._ids_
+		backup_profile "$BKPS_DIR" $PNAME
+		clear
+		print_success $(cat $BKPS_DIR/.last_backuped)
+	fi
+}
+
+backup_as()
+{
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		_back_pwd_="$PWD"
+
+		kill_game
+
+		BKPS_DIR=$(convert_path "$1")
+		cd $GAME_DIR
+
+		tar cf $BKPS_DIR/$2.tar *
+		clear
+		print_success "$2"
+		cd $_back_pwd_
+fi
+
+#	if [ -n "$1" ]
+#	then
+#		BKPS_DIR=$(convert_path "$1")
+#		if [ ! -f "$BKPS_DIR/.last_backuped" ]; then
+#			LR=0
+#		else
+#				LR=$(cat "$BKPS_DIR/.last_backuped")
+#		fi
+#		ONE=1
+#		c=`expr $LR + $ONE`
+#		PNAME=$(get_next_profile_name $c)
+#		PNAME=$2
+
+#		get_profile_id >> $BKPS_DIR/._ids_
+#		backup_profile "$BKPS_DIR" $PNAME
+#		clear
+#		print_success $(cat $BKPS_DIR/.last_backuped)
+#	fi
+}
+
+

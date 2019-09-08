@@ -1,0 +1,42 @@
+search_replace_in_file()
+{
+source `pwd`/.settings
+
+if [ -n "$1" ]
+then
+	is_error=0
+else
+	is_error=1
+fi
+
+if [ -n "$2" ]
+then
+	is_error=0
+else
+	is_error=1
+fi
+
+if [ -n "$3" ]
+then
+	is_error=0
+else
+	is_error=1
+fi
+
+if [ $is_error == 1 ]
+then
+	exit
+else
+	source $TESTS_DIR/if_file_exists
+	TFE=`if_file_exists $1`
+	
+	if [ $TFE == 0 ]
+	then
+		echo "File: $1 not found!"
+		exit 0
+	else
+		sed -i -e 's/'"$2"'/'"$3"'/g' "$1"
+		clear
+	fi
+fi
+}

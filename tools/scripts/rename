@@ -1,0 +1,17 @@
+rename()
+{
+source `pwd`/.settings
+TARGET_DIR=$1
+cd $TARGET_DIR
+for i in * ; do
+[[ -f "$i" ]] || continue
+if [ $i != "$SCRIPTS/get_functions" ]
+then
+	NFN=`echo $i | cut -f1 -d'.'`.tar
+	#    echo $NFN
+	mv $i $NFN
+	#    echo $i | cut -f1 -d'.'
+fi
+done
+cd $WORK_DIR
+}

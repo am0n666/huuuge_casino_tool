@@ -1,0 +1,109 @@
+print_setup()
+{
+	install_dir="`pwd`"
+	fp="$install_dir/tools/default_dettings"
+	source $fp
+
+
+	if [ -f "$install_dir/.settings" ]
+	then
+		source "$install_dir/.settings"
+	fi
+
+
+	if [ $GAME_INSTALLED = 1 ]
+	then
+		echo ""
+		echo "Installation complete."
+		echo "Game directory: $GAME_DIR"
+		echo "Game data backup path: $GAME_DATA_ACKUP_FOLDER_PATH"
+		echo "Restart terminal to get working bash completion commands"
+		echo ""
+		echo ""
+	fi
+}
+
+read_user_info()
+{
+	install_dir="`pwd`"
+	default_hc_data_path="$install_dir/tools/_hc_data_"
+	read -p "Enter location to hc data path (default: $default_hc_data_path): " hc_data_path 
+
+	if [ ! -n "$hc_data_path" ]
+	then
+		hc_data_path="$default_hc_data_path"
+	fi
+
+	if [ ! -d $hc_data_path ]
+	then
+		mkdir -p $hc_data_path
+	fi
+
+	echo "$hc_data_path"
+}
+
+check_defaults()
+{
+	install_dir="`pwd`"
+	fp="$install_dir/tools/default_dettings"
+	echo "GAME_INSTALLED=$GAME_INSTALLED" >> $fp
+
+	
+	echo "HUUUGE_CASINO=com.huuuge.casino.slots" > $fp
+	echo "HUUUGE_CASINO_CLONE=com.huuuge.casino.slott" >> $fp
+	echo "BILLIONAIRE_CASINO=com.huuuge.casino.texas" >> $fp
+	echo "DEFAULT_GAME=\$HUUUGE_CASINO" >> $fp
+	echo "GAME_DATA_ACKUP_FOLDER_PATH=$(read_user_info)" >> $fp
+}
+
+check_settings()
+{
+	install_dir="`pwd`"
+	if [ ! -f "$install_dir/tools/default_dettings" ]
+	then
+		clear
+		check_defaults
+#		print_setup
+	fi
+
+	
+	source $install_dir/tools/default_dettings
+
+	GAME_NAME=$DEFAULT_GAME
+	GAME_DIR=$ANDROID_DATA/data/$GAME_NAME
+	GAME_SAVE_DIR=$GAME_DIR/files/save
+	GAME_MEDIA_DIR=$EXTERNAL_STORAGE/Android/data/$GAME_NAME
+
+	if [ ! -e $GAME_DIR ]
+	then
+		GAME_INSTALLED=0
+	else
+		GAME_INSTALLED=1
+	fi
+
+	echo "WORK_DIR=$install_dir" > $install_dir/.settings
+	echo "TEMP_FILES_PATH=$install_dir/tmp" >> $install_dir/.settings
+	echo "LOGS_FILES_PATH=$install_dir/logs" >> $install_dir/.settings
+	echo "PROFILES_DIR=$install_dir/profiles"   >> $install_dir/.settings
+	echo "SCRIPTS_DIR=$install_dir/tools/scripts"   >> $install_dir/.settings
+	echo "TESTS_DIR=$install_dir/tools/test"   >> $install_dir/.settings
+
+	echo "DIALOG_BACKGROUND_TITLE='Huuuge Casino Game Utility'" >> $install_dir/.settings
+
+	echo "GAME_NAME=$GAME_NAME" >> $install_dir/.settings
+
+	source $install_dir/.settings
+
+	echo "GAME_INSTALLED=$GAME_INSTALLED" >> $install_dir/.settings
+	if [ $GAME_INSTALLED == 1 ]
+	then
+		echo "GAME_USER=$(command ls -ldn $GAME_DIR | awk 'NR==1 {print $3}')" >> $install_dir/.settings
+	fi
+	echo "GAME_DIR=$GAME_DIR" >> $install_dir/.settings
+	echo "GAME_SAVE_DIR=$GAME_SAVE_DIR" >> $install_dir/.settings
+	echo "GAME_MEDIA_DIR=$GAME_MEDIA_DIR" >> $install_dir/.settings
+
+	source $install_dir/.settings
+
+	echo "GAME_CACHE_DIR=$GAME_MEDIA_DIR/cache" >> $install_dir/.settings
+}

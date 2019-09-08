@@ -1,0 +1,16 @@
+tescik()
+{
+	source `pwd`/.settings
+	source $TESTS_DIR/get_func
+
+	converted_path=$(convert_path "$1")
+
+	TEST=$(dir_exists "$converted_path")
+
+	if [ $TEST == 1 ]
+	then
+	restore_dialog "$converted_path"
+	else
+	show_error "Directory not found:\n$converted_path"
+	fi
+}

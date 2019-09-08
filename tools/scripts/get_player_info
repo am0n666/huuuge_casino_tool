@@ -1,0 +1,103 @@
+get_player_info()
+{
+source `pwd`/.settings
+source $TESTS_DIR/if_file_exists
+
+INF=$1
+
+if [ -n "$INF" ]
+then
+	SFPATH=$GAME_SAVE_DIR/save1
+	#SFPATH=$WORK_DIR/save1
+	SF=`if_file_exists $SFPATH`
+	
+	if [ $SF == 0 ]
+	then
+		echo "NONE"
+		#  echo "Save data not found!"
+		#  exit 0
+	else
+		grep -Po $INF'\" type=\"int\">\K.*(?=</key)' $SFPATH > $TEMP_FILES_PATH/pinfo.$$
+		PCHIPS=`cat $TEMP_FILES_PATH/pinfo.$$`
+		if [ -n $PCHIPS ]
+		then
+			echo $PCHIPS
+		else
+			echo "NONE"
+		fi
+	fi
+fi
+}
+
+get_chips()
+{
+PCD=$(get_player_info chips)
+echo $PCD
+exit
+if [ $PCD == "NONE" ]
+then
+	echo "Save data not found!"
+	exit 0
+fi
+echo $PCD
+}
+
+trim_chips()
+{
+PCH=$1
+if [ -n "$PCH" ]
+then
+	#PCH=`get_player_info chips`
+	
+	NR=$PCH
+	LN=$(echo "${#NR}")
+	
+	if [ "$LN" -ge 1 -a "$LN" -le 3 ]; then cut=0;
+elif [ "$LN" -ge 4 -a "$LN" -le 6 ]; then cut=3; desc=K;
+elif [ "$LN" -ge 7 -a "$LN" -le 9 ]; then cut=6; desc=M;
+elif [ "$LN" -ge 10 -a "$LN" -le 12 ]; then cut=9; desc=B;
+elif [ "$LN" -ge 13 -a "$LN" -le 100 ]; then cut=12; desc=T; fi
+
+result=`echo $NR | cut -c-$(expr $LN - $cut)`$desc
+echo $result
+fi
+}
+
+get_chips_trim()
+{
+PCH=`get_player_info chips`
+
+NR=$PCH
+LN=$(echo "${#NR}")
+
+if [ "$LN" -ge 1 -a "$LN" -le 3 ]; then cut=0;
+elif [ "$LN" -ge 4 -a "$LN" -le 6 ]; then cut=3; desc=K;
+elif [ "$LN" -ge 7 -a "$LN" -le 9 ]; then cut=6; desc=M;
+elif [ "$LN" -ge 10 -a "$LN" -le 12 ]; then cut=9; desc=B;
+elif [ "$LN" -ge 13 -a "$LN" -le 100 ]; then cut=12; desc=T; fi
+
+result=`echo $NR | cut -c-$(expr $LN - $cut)`$desc
+echo $result
+}
+
+get_diamonds()
+{
+PCD=`get_player_info diamonds`
+
+if [ $PCD == "NONE" ]
+then
+echo "Save data not found!"
+exit 0
+fi
+echo $PCD
+}
+
+get_short_info()
+{
+PLCHIPS=`get_chips`
+SHORT_PLCHIPS=`trim_chips $PLCHIPS`
+PLDIAM=`get_diamonds`
+
+echo "Chips: "$SHORT_PLCHIPS
+echo "Diamonds: "$PLDIAM
+}

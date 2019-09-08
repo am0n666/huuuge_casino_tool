@@ -1,0 +1,17 @@
+create_default_profile()
+{
+	source `pwd`/.settings
+	source $TESTS_DIR/check_exists
+
+	DP_FILE_PATH=$(file_exists "$WORK_DIR/tools/other/default_profile.tar")
+	DP_FILE_EXISTS=$(file_exists $DP_FILE_PATH)
+
+	if [ $DP_FILE_EXISTS = 1 ]; then
+		rm $DP_FILE_EXISTS
+	fi
+
+	cd $GAME_DIR
+	tar cf $WORK_DIR/tools/other/default_profile.tar files/save/save1 files/save/save2
+	cd $OLDPWD
+	clear
+}

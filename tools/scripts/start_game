@@ -1,0 +1,8 @@
+start_game()
+{
+	source `pwd`/.settings
+
+	am start -S -n $GAME_NAME/com.huuuge.casino.BootActivity --es args '"-v full -o /sdcard/test.vktrace"'
+
+#	am start -W $GAME_NAME/com.huuuge.casino.BootActivity  > /dev/null
+}

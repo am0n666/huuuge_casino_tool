@@ -1,0 +1,19 @@
+count_lines_4_dialog() {
+  dir="$1"
+  count=0
+  lines_plus=7
+  dir_count=0
+  tar_count=0
+  max_lines=16
+  dirs_plus_tar=0
+
+  dir_count=$(find $dir/* -maxdepth 0 -type d | wc -l)
+  tar_count=$(find $dir/* -maxdepth 0 -type f -name "*.tar" | wc -l)
+  dirs_plus_tar=$(expr $dir_count + $tar_count)
+	if [ "$dirs_plus_tar" -ge `expr $max_lines + 1` ]; then
+		dirs_plus_tar=$max_lines;
+	fi
+  count=$(expr $lines_plus + $dirs_plus_tar)
+  
+  echo $count
+}

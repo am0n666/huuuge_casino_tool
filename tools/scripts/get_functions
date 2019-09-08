@@ -1,0 +1,18 @@
+get_functions()
+{
+TESTS=`pwd`/tools/test
+SCRIPTS=`pwd`/tools/scripts
+
+for i in $TESTS/* ; do
+[[ -f "$i" ]] || continue
+source $i
+done
+
+for i in $SCRIPTS/* ; do
+[[ -f "$i" ]] || continue
+if [ $i != "$SCRIPTS/get_functions" ]
+then
+source $i
+fi
+done
+}

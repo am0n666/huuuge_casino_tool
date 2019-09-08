@@ -1,0 +1,15 @@
+restore_club()
+{
+source `pwd`/.settings
+source `pwd`/.clubs
+
+if [ -n "$1" ]
+then
+	CLUBDIR='_club'$1'_'
+	restore_dialog $PWD/$CLUBDIR
+else
+	clear
+	echo "Enter club NR for restoring!"
+	exit 0
+fi
+}

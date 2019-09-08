@@ -1,0 +1,24 @@
+restore_hc_data()
+{
+	source `pwd`/.settings
+	source $install_dir/tools/default_dettings
+	source $SCRIPTS_DIR/kill_game
+	#source $TESTS_DIR/if_dir_exists
+	source $TESTS_DIR/if_file_exists
+
+	kill_game
+
+	BFE2=`if_file_exists $GAME_DATA_ACKUP_FOLDER_PATH/hcdata.tar`
+
+	if [ $BFE2 == 1 ]
+	then
+		cd /sdcard/Android/data
+	
+		if [ -e /sdcard/Android/data/$GAME_NAME ]
+		then
+			rm -Rf /sdcard/Android/data/$GAME_NAME
+		fi
+		tar xf $GAME_DATA_ACKUP_FOLDER_PATH/hcdata.tar
+		cd $WORK_DIR
+	fi
+}

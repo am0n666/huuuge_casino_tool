@@ -1,0 +1,21 @@
+convert_path()
+{
+	if [ -n "$1" ]
+	then
+		source `pwd`/.settings
+		
+		old_path="$@"
+		old_path_wo_slash=${old_path%/}
+
+
+		case "$old_path_wo_slash" in
+		/*)
+				new_path="$old_path_wo_slash"
+				;;
+		*)
+				new_path=`pwd`/"$old_path_wo_slash"
+				;;
+		esac
+		echo $new_path
+	fi
+}

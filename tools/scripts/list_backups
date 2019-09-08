@@ -1,0 +1,35 @@
+list_backups()
+{
+source `pwd`/.settings
+source $TESTS_DIR/if_dir_exists
+source $SCRIPTS_DIR/count_bkps
+
+if [ -n "$1" ]
+then
+	SF=`if_dir_exists $1`
+	
+	if [ $SF == 0 ]
+	then
+		echo "Error" --clear --msgbox "Dir: $1 not found"
+		clear
+		exit 0
+	else
+		FCOUNT=`count_bkps $1`
+		if [ $FCOUNT == 0 ]
+		then
+			echo "No backups found in th this folder."
+			exit 0
+		fi
+		LINES_COUNT=`expr 4 + $FCOUNT`
+		
+		dialog $dlg_begin \
+		--backtitle "$DIALOG_BACKGROUND_TITLE" \
+		--title "Profiles" \
+		--clear \
+		--msgbox "`cd $1 && ls | awk -F"." '{print $1}'`" \
+		$LINES_COUNT $DLGSZER
+		
+		clear
+	fi
+fi
+}

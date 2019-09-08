@@ -1,0 +1,22 @@
+function calculate()
+{
+	source `pwd`/.settings
+	
+	sum=`expr $a * $b`
+	wygrana=$(trim_chips $sum)
+	wygrana=$sum
+
+	echo "Wygrana to :$wygrana";
+}
+
+function calc_win()
+{
+	source `pwd`/.settings
+	
+	echo "Podaj stawke:";
+	read a
+	echo "Podaj przez ile mnozyc:";
+	read b
+	calculate
+}
+

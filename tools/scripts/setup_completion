@@ -1,0 +1,60 @@
+setup_completion()
+{
+  source `pwd`/.settings
+
+  source $TESTS_DIR/if_dir_exists
+  BASH_COMPLETION_DIR=$PREFIX/etc/bash_completion.d
+  BCE=`if_dir_exists $BASH_COMPLETION_DIR`
+
+if [ -f $BASH_COMPLETION_DIR/hcgu-completion.bash ]; then
+	rm $BASH_COMPLETION_DIR/hcgu-completion.bash
+fi
+
+if [ -f $PREFIX/../home/bin/hcgu ]; then
+	rm $PREFIX/../home/bin/hcgu
+fi
+
+  if [ $BCE == "1" ]
+  then
+    cp $WORK_DIR/tools/completion/hcgu-completion.bash $BASH_COMPLETION_DIR/
+
+    USR=$(ls -ldn $PREFIX/../../files | awk 'NR==1 {print $3}')
+    chown  $USR:$USR $BASH_COMPLETION_DIR/hcgu-completion.bash
+    chmod 0600 $BASH_COMPLETION_DIR/hcgu-completion.bash
+
+echo "source `echo $PWD`/.settings" > $PREFIX/../home/bin/hcgu
+
+#echo "OLDPWD=\$PWD" >> $PREFIX/../home/bin/hcgu
+echo "cd \$WORK_DIR" >> $PREFIX/../home/bin/hcgu
+echo "sudo bash menu \"\$@\"" >> $PREFIX/../home/bin/hcgu
+echo "cd \$OLDPWD" >> $PREFIX/../home/bin/hcgu
+
+chmod 0755 $PREFIX/../home/bin/hcgu
+chown  $USR:$USR $PREFIX/../home/bin/hcgu
+
+
+  else
+    exit 0
+  fi
+}
+
+check_completion()
+{
+  source `pwd`/.settings
+
+  source $TESTS_DIR/if_dir_exists
+  BASH_COMPLETION_DIR=$PREFIX/etc/bash_completion.d
+  HCGUCMPLFILE=`if_file_exists $BASH_COMPLETION_DIR/hcgu-completion.bash`
+  source ~/.profile
+
+  if [ $HCGUCMPLFILE != "1" ]
+  then
+    setup_completion
+  fi
+  
+  if [ ! -f "$PREFIX/../home/bin/hcgu" ]
+  then
+    setup_completion
+  fi
+}
+

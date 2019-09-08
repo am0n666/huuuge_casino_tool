@@ -1,0 +1,63 @@
+#!/system/xbin/bash
+
+main_menu()
+{
+source `pwd`/.settings
+#source $SCRIPTS_DIR/del_tmp
+
+#trap 'del_tmp' EXIT # calls deletetempfiles function on exit
+
+LRF=$WORK_DIR/.last_restored
+
+if [ ! -e $LRF ]
+then
+	MM_TITLE="MAIN MENU (Last restored : BRAK)"
+else
+	MM_TITLE="MAIN MENU (Last restored : "`cat $LRF`")"
+fi
+
+while :
+do
+	
+	# Dialog utility to display options list
+	
+	OPTIONS=(
+	1 "Create backup"
+	2 "Backup n clean"
+	3 "Backup, clean n start game"
+	4 "Restore"
+	5 "Clean"
+	6 "Start Game"
+	15 "Wyjscie"
+	)
+
+	dialog $dlg_begin --clear --backtitle "$DIALOG_BACKGROUND_TITLE" --title "$MM_TITLE" \
+	--menu "Use [UP/DOWN] key to move" 20 $DLGSZER 14 \
+	"${OPTIONS[@]}" \
+	2> $TEMP_FILES_PATH/menuchoices.$$
+	
+	
+	
+	retopt=$?
+	choice=`cat $TEMP_FILES_PATH/menuchoices.$$`
+	
+	case $retopt in
+		
+		0) case $choice in
+		
+		1) ./menu backup_profile_dialog $PROFILES_DIR;;
+		2) ./menu backup_profile_dialog $PROFILES_DIR; ./menu clean_profile;;
+		3) ./menu backup_profile_dialog $PROFILES_DIR; ./menu clean_profile; ./menu start_game;;
+		4) ./menu restore_dialog $PROFILES_DIR;;
+		5) ./menu clean_profile;;
+		6) ./menu start_game;;
+		15) clear; exit 0;;
+		
+	esac ;;
+	
+	*)clear ; exit ;;
+esac
+
+done
+
+}

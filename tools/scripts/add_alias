@@ -1,0 +1,47 @@
+add_alias()
+{
+source `pwd`/.settings
+source $TESTS_DIR/if_dir_exists
+source $SCRIPTS_DIR/restore_profile
+source $SCRIPTS_DIR/count_bkps
+
+
+
+
+dialog \
+--clear  $dlg_begin \
+--backtitle "$DIALOG_BACKGROUND_TITLE" \
+--inputbox "Enter alias name " \
+10 $DLGSZER 2>$TEMP_FILES_PATH/alname.$$
+ALIAS_NAME=`cat $TEMP_FILES_PATH/alname.$$`
+
+if [ -n "$ALIAS_NAME" ]
+then
+	dialog \
+	--clear  $dlg_begin \
+	--backtitle "$DIALOG_BACKGROUND_TITLE" \
+	--inputbox "Params: " \
+	10 $DLGSZER 2>$TEMP_FILES_PATH/alparams.$$
+	ALIAS_PARAMS=`cat $TEMP_FILES_PATH/alparams.$$`
+	
+	if [ -n "$ALIAS_PARAMS" ]
+	then
+		# alias hc_short_info="./menu get_short_info"
+		
+		echo "alias hc_`echo $ALIAS_NAME`=\"cd \$WORK_DIR && ./menu `echo $ALIAS_PARAMS`\"" >> $WORK_DIR/.hc_aliases
+		cat $WORK_DIR/alias.tmp
+		echo hc_$ALIAS_NAME
+	else
+		clear
+		echo "Params cannot be empty!"
+		exit 0
+	fi
+	clear
+else
+	clear
+	echo "Alias name cannot be empty!"
+	exit 0
+fi
+#  clear
+exit 0
+}

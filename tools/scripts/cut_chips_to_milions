@@ -1,0 +1,19 @@
+cut_chips_to_milions()
+{
+source `pwd`/.settings
+
+if [ -n "$1" ]
+then
+	PCHIPS=$1
+	LN=$(echo "${#PCHIPS}")
+	
+	if [ $LN -gt 6 ]
+	then
+		MLNS=`expr $LN - 6`
+		result=`echo $PCHIPS | cut -c-$MLNS`
+	else
+		result=0
+	fi
+	echo $result
+fi
+}

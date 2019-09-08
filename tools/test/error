@@ -1,0 +1,50 @@
+log_error() {
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		TIME=$(date +"%H:%M:%S")
+		LOG_OUTPUT="$TIME: $1"
+		ERROR_FILENAME=$(date +"%m-%d-%Y")".log"
+		echo "$LOG_OUTPUT" >> $LOGS_FILES_PATH/$ERROR_FILENAME
+		echo "" >> $LOGS_FILES_PATH/$ERROR_FILENAME
+	fi
+}
+
+show_error()
+{
+	source `pwd`/.settings
+
+	if [ -n "$1" ]
+	then
+		whiptail \
+			--backtitle "$DIALOG_BACKGROUND_TITLE" \
+			--title "Error" \
+			--msgbox "$1" \
+			10 100
+	fi
+	clear
+
+
+#	dialog \
+#		--backtitle "$DIALOG_BACKGROUND_TITLE" \
+#		--title "Error" \
+#		--clear \
+#		--msgbox "`cd $1 && ls | awk -F"." '{print $1}'`" \
+#		$LINES_COUNT $DLGSZER
+		
+#		clear
+#fi
+}
+
+testxxx()
+{
+source `pwd`/.settings
+source $TESTS_DIR/get_func
+
+get_func
+
+#PARENT_COMMAND=$(ps $PPID | tail -n 1 | awk "{print \$5}")
+#show_error $(basename ${BASH_SOURCE[0]})
+}
+
