@@ -2,5 +2,5 @@ logs
 profiles
 tmp
 .settings
-_clb_
-.last*
+_clb*
+.last*.last_restored
