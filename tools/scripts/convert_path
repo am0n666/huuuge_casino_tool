@@ -1,0 +1,11 @@
+function convert_path() {
+	_input="$1"
+	_output=""
+	_fch_=$(printf %.1s "$_input")
+	[ "$_fch_" = "/" ] && _output+="$_input"
+	[ ! "$_fch_" = "/" ] && _output+="`pwd`/$_input"
+	_lch_=${_output:$((${#_output}-1)):1}
+	[ "$_lch_" = "/" ] && _output="${_output:0:${#_output}-1}"
+	echo $_output
+}
+
