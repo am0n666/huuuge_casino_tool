@@ -1,0 +1,23 @@
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+
+restore_hc_data()
+{
+	source "$EXECUTE_DIR/.settings"
+	source "$EXECUTE_DIR/tools/default_dettings"
+	. $SCRIPT_DIR/kill_game
+
+	kill_game
+
+	if [ -e "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" ]
+	then
+		cd /sdcard/Android/data
+	
+		if [ -e /sdcard/Android/data/$GAME_NAME ]
+		then
+			rm -Rf /sdcard/Android/data/$GAME_NAME
+		fi
+		tar xf "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar"
+		cd $OLDPWD
+	fi
+}
