@@ -10,22 +10,18 @@ function backup_profile() {
 
 	kill_game
 
-	if [ -n "$1" ]
-	then
-		if [ -n "$2" ]
+	if [ -n "$1" ] && [ -n "$2" ]; then
+		TARGET_DIR="$(convert_path "$1")"
+		PNAME="$2"
+
+		if [ -e "$TARGET_DIR/$PNAME.tar" ]
 		then
-			TARGET_DIR="$(convert_path "$1")"
-			PNAME="$2"
-
-			if [ -e "$TARGET_DIR/$PNAME.tar" ]
-			then
-				rm -rf "$TARGET_DIR/$PNAME.tar"
-			fi
-
-			SIZE=`du -sk "$GAME_DIR" | cut -f 1`
-			remove_unwanted_files
-			tar_create_archive "$GAME_DIR" "$TARGET_DIR/$PNAME.tar"
-			echo "$PNAME" > "$TARGET_DIR/.last_backuped"
+			rm -rf "$TARGET_DIR/$PNAME.tar"
 		fi
+
+		SIZE=`du -sk "$GAME_DIR" | cut -f 1`
+		remove_unwanted_files
+		tar_create_archive "$GAME_DIR" "$TARGET_DIR/$PNAME.tar"
+		echo "$PNAME" > "$TARGET_DIR/.last_backuped"
 	fi
 }
