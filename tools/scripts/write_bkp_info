@@ -9,14 +9,15 @@ function write_bkp_info() {
 	. $SCRIPT_DIR/get_from_path
 	. $SCRIPT_DIR/get_player_club_id
 	. $SCRIPT_DIR/ckdirex
+	. $SCRIPT_DIR/convert_path
 
 	_cid=$(get_player_club_id "$_FILE1_")
 	tclock=$(printf "%(%H-%M)T\n")
 	dmyear=$(printf "%(%d.%m.%y)T\n");
 
-	lrstr=`cat "$WORK_DIR/.last_restored" | cut -c 2-`
-	info_dir=$WORK_DIR/$(get_from_path $lrstr dir)"/.info"
-	ckdirex "$info_dir"
+	lrstr=$(cat $WORK_DIR/.last_restored)
+	info_dir="$(get_from_path $lrstr dir)/.info"
+	ckdirex $info_dir
 	info_file=$(get_from_path $lrstr name)
 	echo $_cid":"$tclock:$dmyear > $info_dir/$info_file
 }

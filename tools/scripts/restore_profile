@@ -1,0 +1,76 @@
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+
+function write_bkp_infoo() {
+_FILE1_="/data/data/com.huuuge.casino.slots/files/save/save1"
+_FILE2_="/data/data/com.huuuge.casino.slots/files/breakpad/data"
+	source "$MAIN_DIR/.settings"
+	. $SCRIPT_DIR/get_player_club_id
+	. $SCRIPT_DIR/ckdirex
+
+	_cid=$(get_player_club_id "$_FILE1_")
+	tclock=$(printf "%(%H-%M)T\n")
+	dmyear=$(printf "%(%d.%m.%y)T\n");
+
+	lrstr=`cat $WORK_DIR/.last_restored`
+	info_dir=$WORK_DIR/$(get_from_path $lrstr dir)"/.info"
+	ckdirex $info_dir
+	info_file=$(get_from_path $lrstr name)
+	echo $_cid":"$tclock:$dmyear > $info_dir/$info_file
+}
+
+function restore_profile()
+{
+	source "$MAIN_DIR/.settings"
+	source "$MAIN_DIR/tools/default_dettings"
+	. $SCRIPT_DIR/kill_game
+	. $SCRIPT_DIR/convert_path
+	. $SCRIPT_DIR/get_from_path
+	. $SCRIPT_DIR/clean_profile
+	. $SCRIPT_DIR/tar_progress
+	. $SCRIPT_DIR/write_bkp_info
+
+	kill_game
+
+	TARGET_DIR=$(convert_path "$1")
+	PNAME="$2"
+	BACKUP_FILE_PATH="$TARGET_DIR/$PNAME.tar"
+	TARGET_DIR_PATH="$GAME_DIR"
+
+	if [ -f "$BACKUP_FILE_PATH" ] && [ -d "$TARGET_DIR_PATH" ]; then
+		cd "$TARGET_DIR_PATH"
+		rm -rf *
+		tar_unpack "$BACKUP_FILE_PATH" "$TARGET_DIR_PATH"
+		if [ "$DEFAULT_GAME" == "com.huuuge.casino.slots" ]; then
+			if [ -f "$GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar" ]; then
+				rm -rf "$GAME_DIR/files/save/paks"
+				rm -rf "$GAME_DIR/files/save/trpaks"
+				tar xf "$GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar" -C "$GAME_DIR"
+			fi
+		fi
+		chown -R $GAME_USER:$GAME_USER "$TARGET_DIR_PATH"
+		clean_cache
+		echo "$PNAME" > "$TARGET_DIR/.last_restored"
+		echo "$BACKUP_FILE_PATH" > "$WORK_DIR/.last_restored"
+		cd "$OLDPWD"
+		lrstr=$(cat "$WORK_DIR/.last_restored")
+		restore_dir=$(get_from_path $lrstr dir)
+		info_dir=$(get_from_path $lrstr dir)"/.info"
+		info_file=$(get_from_path $lrstr name)
+
+#		if [ ! -d "$info_dir" ]; then
+#			mkdir -p "$info_dir"
+#		fi
+		if [ ! -f "$info_dir/$info_file" ]; then
+			write_bkp_infoo
+		fi
+		
+		_cid=`awk -F: '{print $1}' $info_dir/$info_file`
+		tclock=`awk -F: '{print $2}' $info_dir/$info_file`
+		dmyear=`awk -F: '{print $3}' $info_dir/$info_file`
+		echolor -Y "Restoring: " -R "$restore_dir " -G "`cat $TARGET_DIR/.last_restored`"
+		echolor -Y " - Player club: " -G "`cat clubs/$_cid`" ". \n" -bold -Gy -Y " - Last restored: " -G "$tclock" " " -W "$dmyear"
+	
+		write_bkp_info
+	fi
+}

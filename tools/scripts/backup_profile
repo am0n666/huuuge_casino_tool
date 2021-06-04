@@ -1,11 +1,12 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
 
-backup_profile() {
+function backup_profile() {
 	source "$EXECUTE_DIR/.settings"
 	. $SCRIPT_DIR/kill_game
 	. $SCRIPT_DIR/remove_unwanted_files
 	. $SCRIPT_DIR/convert_path
+	. $SCRIPT_DIR/tar_progress
 
 	kill_game
 
@@ -22,13 +23,9 @@ backup_profile() {
 			fi
 
 			SIZE=`du -sk "$GAME_DIR" | cut -f 1`
-
 			remove_unwanted_files
-
-			cd $GAME_DIR
-			(tar cfP - * | pv -n -s ${SIZE}k > $TARGET_DIR/$PNAME.tar) 2>&1 | dialog --gauge 'Progress' 6 50
+			tar_create_archive "$GAME_DIR" "$TARGET_DIR/$PNAME.tar"
 			echo "$PNAME" > "$TARGET_DIR/.last_backuped"
-			cd "$OLDPWD"
 		fi
 	fi
 }
