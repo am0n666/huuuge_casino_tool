@@ -40,9 +40,6 @@ function restore_profile()
 		info_dir=$(get_from_path $lrstr dir)"/.info"
 		info_file=$(get_from_path $lrstr name)
 
-#		if [ ! -d "$info_dir" ]; then
-#			mkdir -p "$info_dir"
-#		fi
 		if [ ! -f "$info_dir/$info_file" ]; then
 			write_bkp_info
 		fi
