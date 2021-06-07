@@ -7,6 +7,10 @@ backup_hc_data()
 	source "$EXECUTE_DIR/tools/default_dettings"
 	. $SCRIPT_DIR/kill_game
 
+	if [ ! -d "$GAME_DATA_BACKUP_FOLDER_PATH" ]; then
+		mkdir -p "$GAME_DATA_BACKUP_FOLDER_PATH"
+	fi
+
 	kill_game
 
 	if [ -e "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" ]

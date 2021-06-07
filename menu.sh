@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 
 function check_is_root() {
 	if [ "$(id -u)" -eq 0 ]

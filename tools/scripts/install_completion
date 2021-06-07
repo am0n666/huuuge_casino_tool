@@ -35,5 +35,5 @@ function install_completion() {
 	COMPREPLY=( \$( compgen -W '\${COMMANDS[@]}' -- \"\$cur\" ) )
 	}
 	complete -F _hcgu hcgu
-	" > /etc/bash_completion.d/hcgu
+	" > $PREFIX/etc/bash_completion.d/hcgu
 }
