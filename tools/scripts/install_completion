@@ -1,0 +1,39 @@
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+
+function install_completion() {
+	source "$EXECUTE_DIR/.settings"
+	source "$EXECUTE_DIR/tools/default_dettings"
+
+	echo "bash $WORK_DIR/menu.sh \"\$@\"" > "$HOME/bin/hcgu"
+	chmod 0755 "$HOME/bin/hcgu"
+	echo "_hcgu()
+	{
+		local cur prev words cword
+		_init_completion || return
+	
+		local COMMANDS=(
+			\"start_game\"
+			\"kill_game\"
+			\"clean_profile\"
+			\"backup_hc_data\"
+			\"restore_hc_data\"
+			\"restore_next\"
+			\"backup_next\"
+			\"update_backup\"
+			)
+	
+		local command i
+		for (( i=0; i < \${#words[@]}-1; i++ )); do
+			if [[ \${COMMANDS[@]} =~ \${words[i]} ]]; then
+				command=\${words[i]}
+				break
+			fi
+		done
+	
+	
+	COMPREPLY=( \$( compgen -W '\${COMMANDS[@]}' -- \"\$cur\" ) )
+	}
+	complete -F _hcgu hcgu
+	" > /etc/bash_completion.d/hcgu
+}
