@@ -8,9 +8,9 @@ clubstmp="$homepwd/.clubs_temp"
 clubsupdateddir="$clubstmp/$reponame"
 
 function update_github() {
-    g_u_em=am0n666x@gmail.com
-    g_u_n=am0n666
-    g_p=1Oliwka1_
+    g_u_em=user@email.com
+    g_u_n=username
+    g_p=password
 
     repo_name=$(basename "$PWD")
     git init --quiet
