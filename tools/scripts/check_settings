@@ -1,62 +1,58 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
+EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 function check_defaults() {
-	MAIN_DIR="$EXECUTE_DIR"
-	HC_DATA_BKP_DIR="$MAIN_DIR/tools/_hc_data_"
-	FILE_DEFAULT_SETTINGS="$MAIN_DIR/tools/default_dettings"
+    MAIN_DIR="$EXECUTE_DIR"
+    HC_DATA_BKP_DIR="$MAIN_DIR/tools/_hc_data_"
+    FILE_DEFAULT_SETTINGS="$MAIN_DIR/tools/default_dettings"
 
-	echo "HUUUGE_CASINO=com.huuuge.casino.slots" > "$FILE_DEFAULT_SETTINGS"
-	echo "DEFAULT_GAME=\$HUUUGE_CASINO" >> "$FILE_DEFAULT_SETTINGS"
-	echo "GAME_DATA_BACKUP_FOLDER_PATH=$HC_DATA_BKP_DIR" >> "$FILE_DEFAULT_SETTINGS"
+    echo "HUUUGE_CASINO=com.huuuge.casino.slots" >"$FILE_DEFAULT_SETTINGS"
+    echo 'DEFAULT_GAME=$HUUUGE_CASINO' >>"$FILE_DEFAULT_SETTINGS"
+    echo "GAME_DATA_BACKUP_FOLDER_PATH=$HC_DATA_BKP_DIR" >>"$FILE_DEFAULT_SETTINGS"
 }
 
 function check_settings() {
-	MAIN_DIR="$EXECUTE_DIR"
+    MAIN_DIR="$EXECUTE_DIR"
 
-	if [ ! -f "$MAIN_DIR/tools/default_settings" ]
-	then
-		check_defaults
-	fi
+    if [ ! -f "$MAIN_DIR/tools/default_settings" ]; then
+        check_defaults
+    fi
 
-	source "$MAIN_DIR/tools/default_dettings"
+    source "$MAIN_DIR/tools/default_dettings"
 
-	GAME_NAME="$DEFAULT_GAME"
-	GAME_DIR="/data/data/$GAME_NAME"
-	GAME_SAVE_DIR="$GAME_DIR/files/save"
-	GAME_MEDIA_DIR="/sdcard/Android/data/$GAME_NAME"
+    GAME_NAME="$DEFAULT_GAME"
+    GAME_DIR="/data/data/$GAME_NAME"
+    GAME_SAVE_DIR="$GAME_DIR/files/save"
+    GAME_MEDIA_DIR="/sdcard/Android/data/$GAME_NAME"
 
-	if [ ! -e $GAME_DIR ]
-	then
-		GAME_INSTALLED=0
-	else
-		GAME_INSTALLED=1
-	fi
+    if [ ! -e "$GAME_DIR" ]; then
+        GAME_INSTALLED=0
+    else
+        GAME_INSTALLED=1
+    fi
 
-	echo "WORK_DIR=$MAIN_DIR" > "$MAIN_DIR/.settings"
-	echo "TEMP_FILES_PATH=$MAIN_DIR/tmp" >> "$MAIN_DIR/.settings"
-	echo "LOGS_FILES_PATH=$MAIN_DIR/logs" >> "$MAIN_DIR/.settings"
-	echo "PROFILES_DIR=$MAIN_DIR/profiles"   >> "$MAIN_DIR/.settings"
-	echo "SCRIPTS_DIR=$MAIN_DIR/tools/scripts"   >> "$MAIN_DIR/.settings"
-	echo "TESTS_DIR=$MAIN_DIR/tools/test"   >> "$MAIN_DIR/.settings"
-	echo "DIALOG_BACKGROUND_TITLE='Huuuge Casino Game Utility'" >> "$MAIN_DIR/.settings"
-	echo "GAME_NAME=$GAME_NAME" >> "$MAIN_DIR/.settings"
-	echo "GAME_INSTALLED=$GAME_INSTALLED" >> "$MAIN_DIR/.settings"
+    echo "WORK_DIR=$MAIN_DIR" >"$MAIN_DIR/.settings"
+    echo "TEMP_FILES_PATH=$MAIN_DIR/tmp" >>"$MAIN_DIR/.settings"
+    echo "LOGS_FILES_PATH=$MAIN_DIR/logs" >>"$MAIN_DIR/.settings"
+    echo "PROFILES_DIR=$MAIN_DIR/profiles" >>"$MAIN_DIR/.settings"
+    echo "SCRIPTS_DIR=$MAIN_DIR/tools/scripts" >>"$MAIN_DIR/.settings"
+    echo "TESTS_DIR=$MAIN_DIR/tools/test" >>"$MAIN_DIR/.settings"
+    echo "DIALOG_BACKGROUND_TITLE='Huuuge Casino Game Utility'" >>"$MAIN_DIR/.settings"
+    echo "GAME_NAME=$GAME_NAME" >>"$MAIN_DIR/.settings"
+    echo "GAME_INSTALLED=$GAME_INSTALLED" >>"$MAIN_DIR/.settings"
 
-	source "$MAIN_DIR/.settings"
+    source "$MAIN_DIR/.settings"
 
-	if [ $GAME_INSTALLED == 1 ]
-	then
-		. $SCRIPT_DIR/get_owner
-		echo "GAME_USER=$(get_owner "$GAME_DIR")" >> "$MAIN_DIR/.settings"
-	fi
+    if [ $GAME_INSTALLED == 1 ]; then
+        . "$SCRIPT_DIR/get_owner"
+        echo "GAME_USER=$(get_owner "$GAME_DIR")" >>"$MAIN_DIR/.settings"
+    fi
 
-	echo "GAME_DIR=$GAME_DIR" >> "$MAIN_DIR/.settings"
-	echo "GAME_SAVE_DIR=$GAME_SAVE_DIR" >> "$MAIN_DIR/.settings"
-	echo "GAME_MEDIA_DIR=$GAME_MEDIA_DIR" >> "$MAIN_DIR/.settings"
+    echo "GAME_DIR=$GAME_DIR" >>"$MAIN_DIR/.settings"
+    echo "GAME_SAVE_DIR=$GAME_SAVE_DIR" >>"$MAIN_DIR/.settings"
+    echo "GAME_MEDIA_DIR=$GAME_MEDIA_DIR" >>"$MAIN_DIR/.settings"
 
-	source "$MAIN_DIR/.settings"
+    source "$MAIN_DIR/.settings"
 
-	echo "GAME_CACHE_DIR=$GAME_MEDIA_DIR/cache" >> "$MAIN_DIR/.settings"
+    echo "GAME_CACHE_DIR=$GAME_MEDIA_DIR/cache" >>"$MAIN_DIR/.settings"
 }
-

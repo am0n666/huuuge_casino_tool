@@ -1,27 +1,26 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
+EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 function backup_profile() {
-	source "$EXECUTE_DIR/.settings"
-	. $SCRIPT_DIR/kill_game
-	. $SCRIPT_DIR/remove_unwanted_files
-	. $SCRIPT_DIR/convert_path
-	. $SCRIPT_DIR/tar_progress
+    source "$EXECUTE_DIR/.settings"
+    . "$SCRIPT_DIR/kill_game"
+    . "$SCRIPT_DIR/remove_unwanted_files"
+    . "$SCRIPT_DIR/convert_path"
+    . "$SCRIPT_DIR/tar_progress"
 
-	kill_game
+    kill_game
 
-	if [ -n "$1" ] && [ -n "$2" ]; then
-		TARGET_DIR="$(convert_path "$1")"
-		PNAME="$2"
+    if [ -n "$1" ] && [ -n "$2" ]; then
+        TARGET_DIR="$(convert_path "$1")"
+        PNAME="$2"
 
-		if [ -e "$TARGET_DIR/$PNAME.tar" ]
-		then
-			rm -rf "$TARGET_DIR/$PNAME.tar"
-		fi
+        if [ -e "$TARGET_DIR/$PNAME.tar" ]; then
+            rm -rf "$TARGET_DIR/$PNAME.tar"
+        fi
 
-		SIZE=`du -sk "$GAME_DIR" | cut -f 1`
-		remove_unwanted_files
-		tar_create_archive "$GAME_DIR" "$TARGET_DIR/$PNAME.tar"
-		echo "$PNAME" > "$TARGET_DIR/.last_backuped"
-	fi
+        SIZE="$(du -sk "$GAME_DIR" | cut -f 1)"
+        remove_unwanted_files
+        tar_create_archive "$GAME_DIR" "$TARGET_DIR/$PNAME.tar"
+        echo "$PNAME" >"$TARGET_DIR/.last_backuped"
+    fi
 }

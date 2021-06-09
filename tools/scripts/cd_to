@@ -1,4 +1,4 @@
-function  cd_to() {
-	cd "$1"
-	exec $SHELL
+function cd_to()  {
+    cd "$1"
+    exec "$SHELL"
 }

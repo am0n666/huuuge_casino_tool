@@ -1,15 +1,14 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
+EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 kill_game() {
-	bb="$EXECUTE_DIR/tools/bin/bb/$(uname -m)/busybox"
+    bb="$EXECUTE_DIR/tools/bin/bb/$(uname -m)/busybox"
 
-	source "$EXECUTE_DIR/.settings"
-	
-	grep_output=`$bb pgrep $GAME_NAME`
-	
-	if [ -n "$grep_output" ];
-	then
-		kill -9 $grep_output
-	fi
+    source "$EXECUTE_DIR/.settings"
+
+    grep_output="$("$bb" pgrep "$GAME_NAME")"
+
+    if [ -n "$grep_output" ]; then
+        kill -9 "$grep_output"
+    fi
 }

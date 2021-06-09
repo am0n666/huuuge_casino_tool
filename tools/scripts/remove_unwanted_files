@@ -1,17 +1,17 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
+EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 function remove_unwanted_files() {
-	shopt -s globstar
-	source "$EXECUTE_DIR/.settings"
-	cd "$GAME_DIR/files" && find . -name '*cloud*' -exec rm -rf {} + && cd "$OLDPWD"
-	rm -rf "$GAME_DIR/app_optimized"
-	rm -rf "$GAME_DIR/code_cache"
-	rm -rf "$GAME_DIR/files/audience_network.dex"
-	rm -rf "$GAME_DIR/files/_ha_hc_slots_prod.db"
-	rm -rf "$GAME_DIR/cache"
-	rm -Rf "$GAME_DIR/files/adc/media"
-	rm -rf "$GAME_DIR/files/al"
-	rm -rf "$GAME_DIR/files/oat"
-	rm -rf "$GAME_DIR/files/facebook_ml"
+    shopt -s globstar
+    source "$EXECUTE_DIR/.settings"
+    cd "$GAME_DIR/files" && find . -name '*cloud*' -exec rm -rf {} + && cd "$OLDPWD"
+    rm -rf "$GAME_DIR/app_optimized"
+    rm -rf "$GAME_DIR/code_cache"
+    rm -rf "$GAME_DIR/files/audience_network.dex"
+    rm -rf "$GAME_DIR/files/_ha_hc_slots_prod.db"
+    rm -rf "$GAME_DIR/cache"
+    rm -Rf "$GAME_DIR/files/adc/media"
+    rm -rf "$GAME_DIR/files/al"
+    rm -rf "$GAME_DIR/files/oat"
+    rm -rf "$GAME_DIR/files/facebook_ml"
 }

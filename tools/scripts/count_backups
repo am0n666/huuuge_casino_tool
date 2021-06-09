@@ -1,18 +1,16 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
+EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 function count_backups() {
-	. $SCRIPT_DIR/convert_path
-	TARGET_DIR="$(convert_path $1)"
+    . "$SCRIPT_DIR/convert_path"
+    TARGET_DIR="$(convert_path "$1")"
 
-	count=0
-	for f in $TARGET_DIR/*
-	do
-		extension="${f##*.}"
-		if [ $extension == "tar" ]
-		then
-			count=$(command expr $count + 1)
-		fi
-	done
-	echo $count
+    count=0
+    for f in "$TARGET_DIR/*"; do
+        extension="${f##*.}"
+        if [ "$extension" == "tar" ]; then
+            count="$(command expr "$count" + 1)"
+        fi
+    done
+    echo "$count"
 }

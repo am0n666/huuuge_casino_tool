@@ -1,6 +1,6 @@
 function get_owner() {
-	dir_file="$1"
-	if [ -e "$dir_file" ]; then
-		echo $(command ls -ldn $dir_file | awk 'NR==1 {print $3}')
-	fi
+    dir_file="$1"
+    if [ -e "$dir_file" ]; then
+        echo "$(command ls -ldn "$dir_file" | awk 'NR==1 {print $3}')"
+    fi
 }

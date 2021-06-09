@@ -1,19 +1,16 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
-function get_next_profile_name()
-{
+function get_next_profile_name() {
 	source "$MAIN_DIR/.settings"
 	. "$SCRIPT_DIR/convert_path"
 
-	if [ -n "$1" ]
-	then
+	if [ -n "$1" ]; then
 		CURRENT_PROFILE="$1"
 		CURR="$CURRENT_PROFILE"
 		LN="$(echo "${#CURR}")"
 
-		if [ "$LN" == 1 ]
-		then
+		if [ "$LN" == 1 ]; then
 			result="0$(echo "$CURRENT_PROFILE")"
 		else
 			result="$CURRENT_PROFILE"
@@ -22,13 +19,11 @@ function get_next_profile_name()
 	fi
 }
 
-function restore_next()
-{
+function restore_next() {
 	source "$MAIN_DIR/.settings"
 	. "$SCRIPT_DIR/convert_path"
 
-	if [ -n "$1" ]
-	then
+	if [ -n "$1" ]; then
 		BKPS_DIR="$(convert_path "$1")"
 		if [ ! -d "$BKPS_DIR" ]; then
 			echolor -R "Directory: $BKPS_DIR not exists"
@@ -39,8 +34,7 @@ function restore_next()
 		c="$(expr "$LR" + "$ONE")"
 		PNAME="$(get_next_profile_name "$c")"
 
-		if [ -f "$BKPS_DIR/$PNAME.tar" ]
-		then
+		if [ -f "$BKPS_DIR/$PNAME.tar" ]; then
 			restore_profile "$BKPS_DIR" "$PNAME"
 		else
 			echo "No more profiles in this directory"

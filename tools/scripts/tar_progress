@@ -1,31 +1,31 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
+EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 function tar_unpack() {
-	. $SCRIPT_DIR/convert_path
+    . "$SCRIPT_DIR/convert_path"
 
-	INPUT_FILE="$(convert_path "$1")"
-	OUTPUT_DIR="$(convert_path "$2")"
+    INPUT_FILE="$(convert_path "$1")"
+    OUTPUT_DIR="$(convert_path "$2")"
 
-	if [ -n "$INPUT_FILE" ] && [ -n "$OUTPUT_DIR" ]; then
-		if [ -f "$INPUT_FILE" ] && [ -d "$OUTPUT_DIR" ]; then
-			(pv -n "$INPUT_FILE" | tar xf - -C "$OUTPUT_DIR" ) 2>&1 | dialog --gauge "Unpacking..." 6 50
-		fi
-	fi
+    if [ -n "$INPUT_FILE" ] && [ -n "$OUTPUT_DIR" ]; then
+        if [ -f "$INPUT_FILE" ] && [ -d "$OUTPUT_DIR" ]; then
+            (pv -n "$INPUT_FILE" | tar xf - -C "$OUTPUT_DIR") 2>&1 | dialog --gauge "Unpacking..." 6 50
+        fi
+    fi
 }
 
 function tar_create_archive() {
-	. $SCRIPT_DIR/convert_path
+    . "$SCRIPT_DIR/convert_path"
 
-	INPUT_DIR="$(convert_path "$1")"
-	OUTPUT_FILE="$(convert_path "$2")"
+    INPUT_DIR="$(convert_path "$1")"
+    OUTPUT_FILE="$(convert_path "$2")"
 
-	if [ -n "$OUTPUT_FILE" ] && [ -n "$INPUT_DIR" ]; then
-		if [ -d "$INPUT_DIR" ]; then
-			SIZE=$(du -sk "$INPUT_DIR" | cut -f 1)
-			cd "$INPUT_DIR"
-			(tar cfP - * | pv -n -s ${SIZE}k > "$OUTPUT_FILE") 2>&1 | dialog --gauge 'Creating archive...' 6 50
-			cd "$OLDPWD"
-		fi
-	fi
+    if [ -n "$OUTPUT_FILE" ] && [ -n "$INPUT_DIR" ]; then
+        if [ -d "$INPUT_DIR" ]; then
+            SIZE="$(du -sk "$INPUT_DIR" | cut -f 1)"
+            cd "$INPUT_DIR"
+            (tar cfP - * | pv -n -s "${SIZE}k" >"$OUTPUT_FILE") 2>&1 | dialog --gauge 'Creating archive...' 6 50
+            cd "$OLDPWD"
+        fi
+    fi
 }
