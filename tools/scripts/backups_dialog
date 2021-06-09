@@ -1,0 +1,37 @@
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+EXECUTE_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../..";pwd)"
+
+function backups_dialog() {
+	source "$EXECUTE_DIR/.settings"
+	. "$SCRIPT_DIR/convert_path"
+	. "$SCRIPT_DIR/get_from_path"
+
+	if [ -n "$1" ]; then
+		FROM_DIR="$(convert_path $1)"
+
+		tmp_profiles_list_file_="$TEMP_FILES_PATH/tmp_profiles_list_file.$$$"
+
+		cd "$FROM_DIR"
+
+		for i in $(ls -d */); do echo ${i%%/} >> $tmp_profiles_list_file_; done
+		for i in $(ls *.tar); do echo ${i%%/} >> $tmp_profiles_list_file_; done
+
+		ar=()
+		while read n s ; do
+			ar+=($n "$s")
+		done < "$tmp_profiles_list_file_"
+
+		dialog  --menu "Latest news " 0 0 0 "${ar[@]}" 2> $TEMP_FILES_PATH/tmp_menu_choice_.$$
+		retopt=$?
+
+		if [ $retopt == 0 ]; then
+			choice=$(cat "$TEMP_FILES_PATH/tmp_menu_choice_.$$")
+			. "$SCRIPT_DIR/convert_path"
+			selected_path="$(convert_path "$1")/$choice"
+			echo "$selected_path"
+		else
+			echo $retopt
+		fi
+	fi
+}
+
