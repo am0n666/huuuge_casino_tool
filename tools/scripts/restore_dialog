@@ -1,0 +1,62 @@
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
+EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+
+resize >/dev/null
+function restore_dialog() {
+	x=$(expr $COLUMNS - 10)
+	y=$(expr $LINES - 5)
+	z=$(expr $LINES - 10)
+	source "$EXECUTE_DIR/.settings"
+	. "$SCRIPT_DIR/restore_profile"
+	. "$SCRIPT_DIR/convert_path"
+	. "$SCRIPT_DIR/get_from_path"
+
+	tmp_profiles_list_file_="$TEMP_FILES_PATH/tmp_profiles_list_file.$$$"
+
+	if [ ! -n "$1" ]; then
+		exit
+	fi
+
+	INPUT_DIR="$(convert_path "$1")"
+
+	if [ ! -d "$INPUT_DIR" ]; then
+		echo "Directory not found:"
+		echo "$INPUT_DIR"
+		exit
+	fi
+
+	profiles_count=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "*.tar" | wc -l)
+	if [ $profiles_count == 0 ]; then
+		echo "No profiles in this directory"
+		exit
+	fi
+
+	if [ -f "$INPUT_DIR/.last_restored" ]; then
+		LAST_RESTORED="$(cat "$INPUT_DIR/.last_restored" )"
+	else
+		LAST_RESTORED="-NONE-"
+	fi
+
+	cd "$INPUT_DIR"
+	for i in "$(ls *.tar)"; do echo "${i%%/}" >> "$tmp_profiles_list_file_"; done
+	cd "$OLDPWD"
+
+	OPTIONS=()
+	while read n s ; do
+		OPTIONS+=($n "$s")
+	done < "$tmp_profiles_list_file_"
+
+	selected=$(dialog --menu "Last restored: $LAST_RESTORED" $y $x $z "${OPTIONS[@]}" 3>&2 2>&1 1>&3)
+	retv=$?
+
+	if [ $retv = 1 ] || [ $retv = 255 ]; then
+		exit
+	else
+		clear
+		out_path="$INPUT_DIR/$selected"
+		PDIR="$(get_from_path "$out_path" dir)"
+		PNAME="$(get_from_path "$out_path" name)"
+		restore_profile "$PDIR" "$PNAME"
+	fi
+}
+

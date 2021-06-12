@@ -1,5 +1,3 @@
-#!/data/data/com.termux/files/usr/bin/bash
-
 function check_is_root() {
     if [ "$(id -u)" -eq 0 ]; then
         if [ $(ps -o comm= -p $(ps -o ppid= -p $$)) = "sudo" ]; then
