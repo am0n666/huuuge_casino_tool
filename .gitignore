@@ -5,6 +5,7 @@ profiles
 tmp
 clubs
 .settings
+clb
 clb_pis
 clb_pis/
 .last_restored
