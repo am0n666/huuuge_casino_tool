@@ -47,6 +47,7 @@ function restore_dialog() {
 	retv=$?
 
 	if [ $retv = 1 ] || [ $retv = 255 ]; then
+		clear
 		exit
 	else
 		clear
