@@ -1,8 +1,8 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
+WORK_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 function check_defaults() {
-    MAIN_DIR="$EXECUTE_DIR"
+    MAIN_DIR="$WORK_DIR"
     HC_DATA_BKP_DIR="$MAIN_DIR/tools/_hc_data_"
     FILE_DEFAULT_SETTINGS="$MAIN_DIR/tools/default_dettings"
 
@@ -12,7 +12,7 @@ function check_defaults() {
 }
 
 function check_settings() {
-    MAIN_DIR="$EXECUTE_DIR"
+    MAIN_DIR="$WORK_DIR"
 
     if [ ! -f "$MAIN_DIR/tools/default_settings" ]; then
         check_defaults
@@ -44,7 +44,7 @@ function check_settings() {
     source "$MAIN_DIR/.settings"
 
     if [ $GAME_INSTALLED == 1 ]; then
-        . "$SCRIPT_DIR/get_owner"
+        . "$SCRIPTS_DIR/get_owner"
         echo "GAME_USER=$(get_owner "$GAME_DIR")" >>"$MAIN_DIR/.settings"
     fi
 

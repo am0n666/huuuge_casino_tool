@@ -1,9 +1,6 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function remove_unwanted_files() {
     shopt -s globstar
-    source "$EXECUTE_DIR/.settings"
+    source "$WORK_DIR/.settings"
     cd "$GAME_DIR/files" && find . -name '*cloud*' -exec rm -rf {} + && cd "$OLDPWD"
     rm -rf "$GAME_DIR/app_optimized"
     rm -rf "$GAME_DIR/code_cache"

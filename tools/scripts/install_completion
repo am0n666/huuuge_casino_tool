@@ -1,9 +1,6 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function install_completion() {
-    source "$EXECUTE_DIR/.settings"
-    source "$EXECUTE_DIR/tools/default_dettings"
+    source "$WORK_DIR/.settings"
+    source "$WORK_DIR/tools/default_dettings"
 
     echo "bash $WORK_DIR/menu.sh \"\$@\"" >"$HOME/bin/hcgu"
     chmod 0755 "$HOME/bin/hcgu"

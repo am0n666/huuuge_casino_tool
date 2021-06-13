@@ -1,8 +1,5 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function tar_unpack() {
-    . "$SCRIPT_DIR/convert_path"
+    . "$SCRIPTS_DIR/convert_path"
 
     INPUT_FILE="$(convert_path "$1")"
     OUTPUT_DIR="$(convert_path "$2")"
@@ -15,7 +12,7 @@ function tar_unpack() {
 }
 
 function tar_create_archive() {
-    . "$SCRIPT_DIR/convert_path"
+    . "$SCRIPTS_DIR/convert_path"
 
     INPUT_DIR="$(convert_path "$1")"
     OUTPUT_FILE="$(convert_path "$2")"

@@ -1,15 +1,12 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$(cd -P "$( dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function write_bkp_info() {
     _FILE1_="/data/data/com.huuuge.casino.slots/files/save/save1"
     _FILE2_="/data/data/com.huuuge.casino.slots/files/breakpad/data"
 
-    source "$EXECUTE_DIR/.settings"
-    . "$SCRIPT_DIR/get_from_path"
-    . "$SCRIPT_DIR/get_player_club_id"
-    . "$SCRIPT_DIR/ckdirex"
-    . "$SCRIPT_DIR/convert_path"
+    source "$WORK_DIR/.settings"
+    . "$SCRIPTS_DIR/get_from_path"
+    . "$SCRIPTS_DIR/get_player_club_id"
+    . "$SCRIPTS_DIR/ckdirex"
+    . "$SCRIPTS_DIR/convert_path"
 
     _cid="$(get_player_club_id "$_FILE1_")"
     tclock="$(printf "%(%H-%M)T\n")"

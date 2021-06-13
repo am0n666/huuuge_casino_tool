@@ -1,15 +1,15 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function restore_profile() {
-    source "$MAIN_DIR/.settings"
-    source "$MAIN_DIR/tools/default_dettings"
-    . "$SCRIPT_DIR/kill_game"
-    . "$SCRIPT_DIR/convert_path"
-    . "$SCRIPT_DIR/get_from_path"
-    . "$SCRIPT_DIR/clean_profile"
-    . "$SCRIPT_DIR/tar_progress"
-    . "$SCRIPT_DIR/write_bkp_info"
+    _FILE1_="/data/data/com.huuuge.casino.slots/files/save/save1"
+    _FILE2_="/data/data/com.huuuge.casino.slots/files/breakpad/data"
+    source "$WORK_DIR/.settings"
+    source "$WORK_DIR/tools/default_dettings"
+    . "$SCRIPTS_DIR/kill_game"
+    . "$SCRIPTS_DIR/convert_path"
+    . "$SCRIPTS_DIR/get_from_path"
+    . "$SCRIPTS_DIR/clean_profile"
+    . "$SCRIPTS_DIR/tar_progress"
+    . "$SCRIPTS_DIR/write_bkp_info"
+	. "$SCRIPTS_DIR/get_player_club_id"
 
     kill_game
 
@@ -43,10 +43,10 @@ function restore_profile() {
             write_bkp_info
         fi
 
-        _cid="$(awk -F: '{print $1}' "$info_dir/$info_file")"
+	_cid="$(get_player_club_id "$_FILE1_")"
         tclock="$(awk -F: '{print $2}' "$info_dir/$info_file")"
         dmyear="$(awk -F: '{print $3}' "$info_dir/$info_file")"
-        if [ -f "$WORK_DIR/clubs/$_cid" ]; then
+        if [ -e "$WORK_DIR/clubs/$_cid" ]; then
             player_club="$(cat "$WORK_DIR/clubs/$_cid")"
         else
             player_club="UNKNOWN - $_cid"
@@ -57,3 +57,4 @@ function restore_profile() {
         write_bkp_info
     fi
 }
+

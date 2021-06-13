@@ -1,15 +1,12 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 resize >/dev/null
 function restore_dialog() {
 	x=$(expr $COLUMNS - 10)
 	y=$(expr $LINES - 5)
 	z=$(expr $LINES - 10)
-	source "$EXECUTE_DIR/.settings"
-	. "$SCRIPT_DIR/restore_profile"
-	. "$SCRIPT_DIR/convert_path"
-	. "$SCRIPT_DIR/get_from_path"
+	source "$WORK_DIR/.settings"
+	. "$SCRIPTS_DIR/restore_profile"
+	. "$SCRIPTS_DIR/convert_path"
+	. "$SCRIPTS_DIR/get_from_path"
 
 	tmp_profiles_list_file_="$TEMP_FILES_PATH/tmp_profiles_list_file.$$$"
 

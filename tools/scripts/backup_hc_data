@@ -1,10 +1,7 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR=" $(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function backup_hc_data() {
-    source "$EXECUTE_DIR/.settings"
-    source "$EXECUTE_DIR/tools/default_dettings"
-    . "$SCRIPT_DIR/kill_game"
+    source "$WORK_DIR/.settings"
+    source "$WORK_DIR/tools/default_dettings"
+    . "$SCRIPTS_DIR/kill_game"
 
     if [ ! -d "$GAME_DATA_BACKUP_FOLDER_PATH" ]; then
         mkdir -p "$GAME_DATA_BACKUP_FOLDER_PATH"
@@ -22,11 +19,10 @@ function backup_hc_data() {
 
     cd "$GAME_DIR"
     tar cf "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" "files/save/paks" "files/save/trpaks"
-    cd "/sdcard/Android/data"
-    tar cf "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" "$GAME_NAME/files/assetcache/*"
-    cd "$GAME_DIR"
-    tar cf "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" "files/save/paks" "files/save/trpaks"
     cd "$OLDPWD"
+    cd "/sdcard/Android/data"
+    tar cf "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" "$GAME_NAME/files/assetcache/"
+    cd $OLDPWD
     echolor -Y "Backup of game data created in: "
     echolor -C "$GAME_DATA_BACKUP_FOLDER_PATH"
 }

@@ -1,8 +1,5 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function count_backups() {
-    . "$SCRIPT_DIR/convert_path"
+    . "$SCRIPTS_DIR/convert_path"
     TARGET_DIR="$(convert_path "$1")"
 
     count=0

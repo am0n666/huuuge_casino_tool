@@ -1,11 +1,8 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function update_backup() {
-    source "$EXECUTE_DIR/.settings"
-    . "$SCRIPT_DIR/get_from_path"
-    . "$SCRIPT_DIR/convert_path"
-    . "$SCRIPT_DIR/write_bkp_info"
+    source "$WORK_DIR/.settings"
+    . "$SCRIPTS_DIR/get_from_path"
+    . "$SCRIPTS_DIR/convert_path"
+    . "$SCRIPTS_DIR/write_bkp_info"
 
     get_lr="$(awk '{print substr($0,2)}' "$WORK_DIR/.last_restored")"
     _last_restored_="$(convert_path "$get_lr")"
@@ -18,6 +15,6 @@ function update_backup() {
 
     backup_profile "$BKP_DIR" "$BKP_NAME"
 
-    bash "$EXECUTE_DIR/tools/bin/echolor" -Y "Profile updated"
+    bash "$WORK_DIR/tools/bin/echolor" -Y "Profile updated"
     write_bkp_info
 }

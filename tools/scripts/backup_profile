@@ -1,12 +1,9 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function backup_profile() {
-    source "$EXECUTE_DIR/.settings"
-    . "$SCRIPT_DIR/kill_game"
-    . "$SCRIPT_DIR/remove_unwanted_files"
-    . "$SCRIPT_DIR/convert_path"
-    . "$SCRIPT_DIR/tar_progress"
+    source "$WORK_DIR/.settings"
+    . "$SCRIPTS_DIR/kill_game"
+    . "$SCRIPTS_DIR/remove_unwanted_files"
+    . "$SCRIPTS_DIR/convert_path"
+    . "$SCRIPTS_DIR/tar_progress"
 
     kill_game
 

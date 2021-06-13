@@ -1,8 +1,5 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 start_game() {
-    source "$EXECUTE_DIR/.settings"
-    . "$SCRIPT_DIR/nout"
+    source "$WORK_DIR/.settings"
+    . "$SCRIPTS_DIR/nout"
     nout am start -S -n "$GAME_NAME/com.huuuge.casino.BootActivity" --es args '"-v full -o /sdcard/test.vktrace"'
 }

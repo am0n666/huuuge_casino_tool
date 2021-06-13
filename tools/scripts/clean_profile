@@ -1,9 +1,6 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function clean_cache() {
-    source "$EXECUTE_DIR/.settings"
-    source "$EXECUTE_DIR/tools/default_dettings"
+    source "$WORK_DIR/.settings"
+    source "$WORK_DIR/tools/default_dettings"
 
     if [ -d "$1" ]; then
         rm -Rf "$GAME_CACHE_DIR"
@@ -12,8 +9,8 @@ function clean_cache() {
 }
 
 function clean_profile() {
-    source "$EXECUTE_DIR/.settings"
-    . "$SCRIPT_DIR/kill_game"
+    source "$WORK_DIR/.settings"
+    . "$SCRIPTS_DIR/kill_game"
 
     kill_game
 

@@ -1,8 +1,5 @@
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")"  && pwd)"
-EXECUTE_DIR="$( cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
 function get_profile_id() {
-    source "$EXECUTE_DIR/.settings"
+    source "$WORK_DIR/.settings"
 
     ID_FROM_FILE="$(cat "$GAME_DIR/files/breakpad/data")"
     RESULT_ID="$(echo "$ID_FROM_FILE" | awk -F"[" '{print $2}' | awk -F"]" '{print $1}')"

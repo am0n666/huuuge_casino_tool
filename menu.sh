@@ -64,6 +64,8 @@ if [ "$GAME_INSTALLED" == "0" ]; then
     exit 99
 fi
 
+export WORK_DIR SCRIPTS_DIR
+
 trap 'del_tmp' EXIT # calls deletetempfiles function on exit
 
 "$@"
