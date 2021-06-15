@@ -14,6 +14,8 @@ function update_backup() {
 
     backup_profile "$BKP_DIR" "$BKP_NAME"
 
+    clear
+
     bash "$WORK_DIR/tools/bin/echolor" -Y "Profile updated"
     write_bkp_info
 }
