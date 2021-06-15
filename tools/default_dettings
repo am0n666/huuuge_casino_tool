@@ -1,3 +1,3 @@
 HUUUGE_CASINO=com.huuuge.casino.slots
 DEFAULT_GAME=$HUUUGE_CASINO
-GAME_DATA_BACKUP_FOLDER_PATH=/root/huuuge_casino_tool/tools/_hc_data_
+GAME_DATA_BACKUP_FOLDER_PATH=/data/data/com.termux/files/root/huuuge_casino_tool/tools/_hc_data_

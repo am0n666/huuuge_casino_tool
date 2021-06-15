@@ -4,9 +4,8 @@ function update_backup() {
     . "$SCRIPTS_DIR/convert_path"
     . "$SCRIPTS_DIR/write_bkp_info"
 
-    get_lr="$(awk '{print substr($0,2)}' "$WORK_DIR/.last_restored")"
-    _last_restored_="$(convert_path "$get_lr")"
-
+    get_lr="$(cat "$WORK_DIR/.last_restored")"
+    _last_restored_="$get_lr"
     BKP_DIR="$(get_from_path "$_last_restored_" dir)"
     BKP_NAME="$(get_from_path "$_last_restored_" name)"
     PROFILE_FP="$BKP_DIR/$BKP_NAME.tar"
