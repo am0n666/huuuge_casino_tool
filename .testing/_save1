@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<registry>
+	<node name="/casino">
+		<key name="appVersion" type="string">7.4.3100</key>
+		<key name="appslaunches" type="int">27</key>
+		<key name="gamespak" type="string">/assetcache/data-games-upd.pak</key>
+		<key name="tutorial_dailyBonus" type="bool">true</key>
+		<key name="tutorial_session_count" type="int">2</key>
+		<node name="ageverification">
+			<key name="verified" type="bool">true</key>
+		</node>
+		<node name="downloader">
+			<node name="requested">
+				<key name="SlotsTitans-group" type="bool">true</key>
+			</node>
+		</node>
+		<node name="gdpr">
+			<key name="accepted" type="bool">true</key>
+			<key name="chosen" type="bool">true</key>
+		</node>
+		<node name="idfa-native">
+			<key name="claimedRewardsNumber" type="int">0</key>
+		</node>
+		<node name="newsfeed">
+			<node name="13051">
+				<key name="1" type="bool">true</key>
+			</node>
+			<node name="13323">
+				<key name="1" type="bool">false</key>
+			</node>
+			<node name="13410">
+				<key name="1" type="bool">false</key>
+			</node>
+			<node name="13427">
+				<key name="1" type="bool">false</key>
+			</node>
+			<node name="13568">
+				<key name="1" type="bool">false</key>
+			</node>
+			<node name="ANNOUNCEMENT_NEWS_FEED">
+				<node name="1448156">
+					<key name="1" type="bool">true</key>
+				</node>
+				<node name="1464906">
+					<key name="1" type="bool">true</key>
+				</node>
+				<node name="1464915">
+					<key name="1" type="bool">true</key>
+				</node>
+				<node name="1476288">
+					<key name="1" type="bool">true</key>
+				</node>
+				<node name="1476289">
+					<key name="1" type="bool">true</key>
+				</node>
+				<node name="1476290">
+					<key name="1" type="bool">true</key>
+				</node>
+			</node>
+			<node name="DIRECT_PURCHASE_NEWS_FEED">
+				<node name="1481184">
+					<key name="1" type="bool">true</key>
+				</node>
+				<node name="1481209">
+					<key name="1" type="bool">true</key>
+				</node>
+				<node name="1481333">
+					<key name="1" type="bool">true</key>
+				</node>
+			</node>
+			<node name="NATIVE_NEWS_FEED">
+				<node name="fb">
+					<key name="1" type="bool">false</key>
+				</node>
+				<node name="rateus">
+					<key name="1" type="bool">false</key>
+				</node>
+			</node>
+			<node name="rateus">
+				<key name="1" type="bool">true</key>
+			</node>
+		</node>
+		<node name="notif">
+			<key name="deviceTokenSent" type="bool">true</key>
+			<key name="enable" type="bool">true</key>
+			<key name="remoteInitilized" type="bool">true</key>
+			<node name="1">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="10">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="11">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="13">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="14">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="15">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="2">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="3">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="4">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="5">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="6">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="7">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="8">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="9">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="daily">
+				<key name="enable" type="bool">true</key>
+				<key name="msgidx" type="int">5</key>
+			</node>
+			<node name="lottery">
+				<key name="enable" type="bool">true</key>
+				<key name="msgidx" type="int">0</key>
+			</node>
+			<node name="periodic">
+				<key name="enable" type="bool">true</key>
+				<key name="msgidx" type="int">0</key>
+			</node>
+			<node name="vip">
+				<key name="enable" type="bool">true</key>
+			</node>
+			<node name="xp_boost">
+				<key name="enable" type="bool">true</key>
+			</node>
+		</node>
+		<node name="paktracker">
+			<key name="SlotsAgent777" type="bool">true</key>
+			<key name="SlotsAgent777HighLimit" type="bool">true</key>
+			<key name="SlotsAgent777HighRoller" type="bool">true</key>
+			<key name="SlotsAphrodite" type="bool">true</key>
+			<key name="SlotsAphroditeHighLimit" type="bool">true</key>
+			<key name="SlotsAphroditeHighRoller" type="bool">true</key>
+			<key name="SlotsArcticAnimals" type="bool">true</key>
+			<key name="SlotsArcticAnimalsHighLimit" type="bool">true</key>
+			<key name="SlotsArcticAnimalsHighRoller" type="bool">true</key>
+			<key name="SlotsAztec" type="bool">true</key>
+			<key name="SlotsAztecHighLimit" type="bool">true</key>
+			<key name="SlotsAztecHighRoller" type="bool">true</key>
+			<key name="SlotsBarsAndSevens" type="bool">true</key>
+			<key name="SlotsBarsAndSevensHighLimit" type="bool">true</key>
+			<key name="SlotsBarsAndSevensHighRoller" type="bool">true</key>
+			<key name="SlotsBillionaire" type="bool">true</key>
+			<key name="SlotsBillionaireHighLimit" type="bool">true</key>
+			<key name="SlotsBillionaireHighRoller" type="bool">true</key>
+			<key name="SlotsBookOfRa" type="bool">true</key>
+			<key name="SlotsBookOfRaCustom" type="bool">true</key>
+			<key name="SlotsBookOfRaHighLimit" type="bool">true</key>
+			<key name="SlotsBookOfRaHighRoller" type="bool">true</key>
+			<key name="SlotsBurningFruits" type="bool">true</key>
+			<key name="SlotsBurningFruitsHighLimit" type="bool">true</key>
+			<key name="SlotsBurningFruitsHighRoller" type="bool">true</key>
+			<key name="SlotsBurningHot" type="bool">true</key>
+			<key name="SlotsBurningHotHighLimit" type="bool">true</key>
+			<key name="SlotsBurningHotHighRoller" type="bool">true</key>
+			<key name="SlotsCamelotCash" type="bool">true</key>
+			<key name="SlotsCamelotCashHighLimit" type="bool">true</key>
+			<key name="SlotsCandyParty" type="bool">true</key>
+			<key name="SlotsCandyPartyHighLimit" type="bool">true</key>
+			<key name="SlotsCandyPartyHighRoller" type="bool">true</key>
+			<key name="SlotsCashFever" type="bool">true</key>
+			<key name="SlotsCashFeverHighLimit" type="bool">true</key>
+			<key name="SlotsCashFeverHighRoller" type="bool">true</key>
+			<key name="SlotsCats" type="bool">true</key>
+			<key name="SlotsCatsHighLimit" type="bool">true</key>
+			<key name="SlotsCatsHighRoller" type="bool">true</key>
+			<key name="SlotsCinderellasBall" type="bool">true</key>
+			<key name="SlotsCinderellasBallHighLimit" type="bool">true</key>
+			<key name="SlotsCinderellasBallHighRoller" type="bool">true</key>
+			<key name="SlotsClassic81" type="bool">true</key>
+			<key name="SlotsClassic81HighLimit" type="bool">true</key>
+			<key name="SlotsClassic81HighRoller" type="bool">true</key>
+			<key name="SlotsClassicDiamonds" type="bool">true</key>
+			<key name="SlotsClassicDiamondsHighRoller" type="bool">true</key>
+			<key name="SlotsClassicDiamondsPro" type="bool">true</key>
+			<key name="SlotsClassicFruits" type="bool">true</key>
+			<key name="SlotsClassicFruitsHighLimit" type="bool">true</key>
+			<key name="SlotsClassicFruitsHighRoller" type="bool">true</key>
+			<key name="SlotsClassicHot" type="bool">true</key>
+			<key name="SlotsClassicHot20" type="bool">true</key>
+			<key name="SlotsClassicHot20HighLimit" type="bool">true</key>
+			<key name="SlotsClassicHot20HighRoller" type="bool">true</key>
+			<key name="SlotsClassicHot40" type="bool">true</key>
+			<key name="SlotsClassicHot40HighLimit" type="bool">true</key>
+			<key name="SlotsClassicHot40HighRoller" type="bool">true</key>
+			<key name="SlotsClassicHotHighLimit" type="bool">true</key>
+			<key name="SlotsClassicHotHighRoller" type="bool">true</key>
+			<key name="SlotsClassicInvestigation" type="bool">true</key>
+			<key name="SlotsClassicInvestigationHighLimit" type="bool">true</key>
+			<key name="SlotsClassicInvestigationHighRoller" type="bool">true</key>
+			<key name="SlotsClassicJoker" type="bool">true</key>
+			<key name="SlotsClassicJokerHighLimit" type="bool">true</key>
+			<key name="SlotsClassicJokerHighRoller" type="bool">true</key>
+			<key name="SlotsClassicOlympic" type="bool">true</key>
+			<key name="SlotsClassicOlympicCustom" type="bool">true</key>
+			<key name="SlotsClassicOlympicHighLimit" type="bool">true</key>
+			<key name="SlotsClassicOlympicHighRoller" type="bool">true</key>
+			<key name="SlotsClassicRespins" type="bool">true</key>
+			<key name="SlotsClassicRespinsHighLimit" type="bool">true</key>
+			<key name="SlotsClassicRespinsHighRoller" type="bool">true</key>
+			<key name="SlotsClassicRunner" type="bool">true</key>
+			<key name="SlotsClassicRunnerCustom" type="bool">true</key>
+			<key name="SlotsClassicRunnerHighLimit" type="bool">true</key>
+			<key name="SlotsClassicRunnerHighRoller" type="bool">true</key>
+			<key name="SlotsCleopatra" type="bool">true</key>
+			<key name="SlotsCleopatraHighLimit" type="bool">true</key>
+			<key name="SlotsCleopatraHighRoller" type="bool">true</key>
+			<key name="SlotsCrystalCave" type="bool">true</key>
+			<key name="SlotsCrystalCaveHighLimit" type="bool">true</key>
+			<key name="SlotsCrystalCaveHighRoller" type="bool">true</key>
+			<key name="SlotsCursedPrince" type="bool">true</key>
+			<key name="SlotsCuteHorrorStory" type="bool">true</key>
+			<key name="SlotsCuteHorrorStoryHighLimit" type="bool">true</key>
+			<key name="SlotsCuteHorrorStoryHighRoller" type="bool">true</key>
+			<key name="SlotsDiscoReelsHighLimit" type="bool">true</key>
+			<key name="SlotsDogs" type="bool">true</key>
+			<key name="SlotsDogsHighLimit" type="bool">true</key>
+			<key name="SlotsDogsHighRoller" type="bool">true</key>
+			<key name="SlotsDorothysAdventure" type="bool">true</key>
+			<key name="SlotsDorothysAdventureHighLimit" type="bool">true</key>
+			<key name="SlotsDorothysAdventureHighRoller" type="bool">true</key>
+			<key name="SlotsDoubleDiamondsHighLimit" type="bool">true</key>
+			<key name="SlotsDracula" type="bool">true</key>
+			<key name="SlotsDraculaHighLimit" type="bool">true</key>
+			<key name="SlotsDraculaHighRoller" type="bool">true</key>
+			<key name="SlotsDragon" type="bool">true</key>
+			<key name="SlotsDragonHighLimit" type="bool">true</key>
+			<key name="SlotsDragonHighRoller" type="bool">true</key>
+			<key name="SlotsDragonsPit" type="bool">true</key>
+			<key name="SlotsDragonsPitHighLimit" type="bool">true</key>
+			<key name="SlotsDragonsPitHighRoller" type="bool">true</key>
+			<key name="SlotsEmeraldGoddess" type="bool">true</key>
+			<key name="SlotsEmeraldGoddessHighLimit" type="bool">true</key>
+			<key name="SlotsEmeraldGoddessHighRoller" type="bool">true</key>
+			<key name="SlotsFrozenWild" type="bool">true</key>
+			<key name="SlotsFrozenWildHighLimit" type="bool">true</key>
+			<key name="SlotsFrozenWildHighRoller" type="bool">true</key>
+			<key name="SlotsGoldenCastle" type="bool">true</key>
+			<key name="SlotsGoldenCastleHighLimit" type="bool">true</key>
+			<key name="SlotsGoldenCastleHighRoller" type="bool">true</key>
+			<key name="SlotsGoldenTemple" type="bool">true</key>
+			<key name="SlotsGoldenTempleHighLimit" type="bool">true</key>
+			<key name="SlotsGoldenTempleHighRoller" type="bool">true</key>
+			<key name="SlotsGreekGod" type="bool">true</key>
+			<key name="SlotsGreekGodHighLimit" type="bool">true</key>
+			<key name="SlotsGreekGodHighRoller" type="bool">true</key>
+			<key name="SlotsHercules" type="bool">true</key>
+			<key name="SlotsHerculesHighLimit" type="bool">true</key>
+			<key name="SlotsHerculesHighRoller" type="bool">true</key>
+			<key name="SlotsHorus" type="bool">true</key>
+			<key name="SlotsHorusHighLimit" type="bool">true</key>
+			<key name="SlotsHorusHighRoller" type="bool">true</key>
+			<key name="SlotsIceKingdom" type="bool">true</key>
+			<key name="SlotsIceKingdomHighLimit" type="bool">true</key>
+			<key name="SlotsIceKingdomHighRoller" type="bool">true</key>
+			<key name="SlotsItsAlive" type="bool">true</key>
+			<key name="SlotsJackpotBloomsHighLimit" type="bool">true</key>
+			<key name="SlotsJungle" type="bool">true</key>
+			<key name="SlotsJungleHighRoller" type="bool">true</key>
+			<key name="SlotsJunglePro" type="bool">true</key>
+			<key name="SlotsKinglyFruits" type="bool">true</key>
+			<key name="SlotsKinglyFruitsHighLimit" type="bool">true</key>
+			<key name="SlotsKinglyFruitsHighRoller" type="bool">true</key>
+			<key name="SlotsKittens" type="bool">true</key>
+			<key name="SlotsKittensHighRoller" type="bool">true</key>
+			<key name="SlotsKittensPro" type="bool">true</key>
+			<key name="SlotsLinkCloverManiaHighRoller" type="bool">true</key>
+			<key name="SlotsLinkLuxorTreasuresHighRoller" type="bool">true</key>
+			<key name="SlotsLostTomb" type="bool">true</key>
+			<key name="SlotsLostTombHighLimit" type="bool">true</key>
+			<key name="SlotsLostTombHighRoller" type="bool">true</key>
+			<key name="SlotsLuckyFarm" type="bool">true</key>
+			<key name="SlotsLuckyFarmHighLimit" type="bool">true</key>
+			<key name="SlotsLuckyFarmHighRoller" type="bool">true</key>
+			<key name="SlotsLuckyLeprechaun" type="bool">true</key>
+			<key name="SlotsLuckyLeprechaunHighLimit" type="bool">true</key>
+			<key name="SlotsLuckyLeprechaunHighRoller" type="bool">true</key>
+			<key name="SlotsLuckyRestaurant" type="bool">true</key>
+			<key name="SlotsLuckyRestaurantHighLimit" type="bool">true</key>
+			<key name="SlotsLuckyRestaurantHighRoller" type="bool">true</key>
+			<key name="SlotsMagesLair" type="bool">true</key>
+			<key name="SlotsMagesLairHighLimit" type="bool">true</key>
+			<key name="SlotsMagesLairHighRoller" type="bool">true</key>
+			<key name="SlotsMagicForest" type="bool">true</key>
+			<key name="SlotsMagicForestHighLimit" type="bool">true</key>
+			<key name="SlotsMagicForestHighRoller" type="bool">true</key>
+			<key name="SlotsMerryChristmas" type="bool">true</key>
+			<key name="SlotsMerryChristmasHighLimit" type="bool">true</key>
+			<key name="SlotsMerryChristmasHighRoller" type="bool">true</key>
+			<key name="SlotsMidnightMeadow" type="bool">true</key>
+			<key name="SlotsMidnightMeadowHighLimit" type="bool">true</key>
+			<key name="SlotsMidnightMeadowHighRoller" type="bool">true</key>
+			<key name="SlotsModern" type="bool">true</key>
+			<key name="SlotsModernHighLimit" type="bool">true</key>
+			<key name="SlotsModernHighRoller" type="bool">true</key>
+			<key name="SlotsMultipleClassic" type="bool">true</key>
+			<key name="SlotsMultipleClassicCustom" type="bool">true</key>
+			<key name="SlotsMultipleClassicHighLimit" type="bool">true</key>
+			<key name="SlotsMultipleClassicHighRoller" type="bool">true</key>
+			<key name="SlotsPeterPan" type="bool">true</key>
+			<key name="SlotsPeterPanHighLimit" type="bool">true</key>
+			<key name="SlotsPeterPanHighRoller" type="bool">true</key>
+			<key name="SlotsPharaoh" type="bool">true</key>
+			<key name="SlotsPharaohHighLimit" type="bool">true</key>
+			<key name="SlotsPharaohHighRoller" type="bool">true</key>
+			<key name="SlotsPinocchioTales" type="bool">true</key>
+			<key name="SlotsPinocchioTalesHighLimit" type="bool">true</key>
+			<key name="SlotsPinocchioTalesHighRoller" type="bool">true</key>
+			<key name="SlotsPoodles" type="bool">true</key>
+			<key name="SlotsPoodlesHighLimit" type="bool">true</key>
+			<key name="SlotsPoodlesHighRoller" type="bool">true</key>
+			<key name="SlotsPrincess" type="bool">true</key>
+			<key name="SlotsPrincessHighLimit" type="bool">true</key>
+			<key name="SlotsPrincessHighRoller" type="bool">true</key>
+			<key name="SlotsPuppies" type="bool">true</key>
+			<key name="SlotsPuppiesHighLimit" type="bool">true</key>
+			<key name="SlotsPuppiesHighRoller" type="bool">true</key>
+			<key name="SlotsQuintupleMagic" type="bool">true</key>
+			<key name="SlotsQuintupleMagicCustom" type="bool">true</key>
+			<key name="SlotsQuintupleMagicHighRoller" type="bool">true</key>
+			<key name="SlotsQuintupleMagicPro" type="bool">true</key>
+			<key name="SlotsRa" type="bool">true</key>
+			<key name="SlotsRaHighRoller" type="bool">true</key>
+			<key name="SlotsRaPro" type="bool">true</key>
+			<key name="SlotsRedHood" type="bool">true</key>
+			<key name="SlotsRedHoodHighLimit" type="bool">true</key>
+			<key name="SlotsRedHoodHighRoller" type="bool">true</key>
+			<key name="SlotsRetroReels" type="bool">true</key>
+			<key name="SlotsRetroReelsHighLimit" type="bool">true</key>
+			<key name="SlotsRetroReelsHighRoller" type="bool">true</key>
+			<key name="SlotsRio" type="bool">true</key>
+			<key name="SlotsRioHighLimit" type="bool">true</key>
+			<key name="SlotsRioHighRoller" type="bool">true</key>
+			<key name="SlotsRobinHood" type="bool">true</key>
+			<key name="SlotsRobinHoodHighLimit" type="bool">true</key>
+			<key name="SlotsRobinHoodHighRoller" type="bool">true</key>
+			<key name="SlotsSamurai" type="bool">true</key>
+			<key name="SlotsSamuraiHighLimit" type="bool">true</key>
+			<key name="SlotsSamuraiHighRoller" type="bool">true</key>
+			<key name="SlotsScarecrowOzzy" type="bool">true</key>
+			<key name="SlotsScarecrowOzzyHighLimit" type="bool">true</key>
+			<key name="SlotsScarecrowOzzyHighRoller" type="bool">true</key>
+			<key name="SlotsSecretsDeep" type="bool">true</key>
+			<key name="SlotsSecretsDeepHighLimit" type="bool">true</key>
+			<key name="SlotsSecretsDeepHighRoller" type="bool">true</key>
+			<key name="SlotsSherlock" type="bool">true</key>
+			<key name="SlotsSherlockCustom" type="bool">true</key>
+			<key name="SlotsSherlockHighLimit" type="bool">true</key>
+			<key name="SlotsSherlockHighRoller" type="bool">true</key>
+			<key name="SlotsSkyCity" type="bool">true</key>
+			<key name="SlotsSkyCityHighLimit" type="bool">true</key>
+			<key name="SlotsSkyCityHighRoller" type="bool">true</key>
+			<key name="SlotsSnowWhite" type="bool">true</key>
+			<key name="SlotsSnowWhiteHighLimit" type="bool">true</key>
+			<key name="SlotsSnowWhiteHighRoller" type="bool">true</key>
+			<key name="SlotsSultanPalace" type="bool">true</key>
+			<key name="SlotsSultanPalaceHighRoller" type="bool">true</key>
+			<key name="SlotsSultanPalacePro" type="bool">true</key>
+			<key name="SlotsSuperClassic" type="bool">true</key>
+			<key name="SlotsSuperClassicHighLimit" type="bool">true</key>
+			<key name="SlotsSuperClassicHighRoller" type="bool">true</key>
+			<key name="SlotsTarzan" type="bool">true</key>
+			<key name="SlotsTarzanHighLimit" type="bool">true</key>
+			<key name="SlotsTarzanHighRoller" type="bool">true</key>
+			<key name="SlotsThor" type="bool">true</key>
+			<key name="SlotsThorHighLimit" type="bool">true</key>
+			<key name="SlotsThorHighRoller" type="bool">true</key>
+			<key name="SlotsTiki" type="bool">true</key>
+			<key name="SlotsTikiHighLimit" type="bool">true</key>
+			<key name="SlotsTikiHighRoller" type="bool">true</key>
+			<key name="SlotsTitansHighRoller" type="bool">true</key>
+			<key name="SlotsTripleDublinHighLimit" type="bool">true</key>
+			<key name="SlotsVampiresSaga" type="bool">true</key>
+			<key name="SlotsVampiresSagaHighLimit" type="bool">true</key>
+			<key name="SlotsVampiresSagaHighRoller" type="bool">true</key>
+			<key name="SlotsVikings" type="bool">true</key>
+			<key name="SlotsVikingsHighLimit" type="bool">true</key>
+			<key name="SlotsVikingsHighRoller" type="bool">true</key>
+			<key name="SlotsVintage" type="bool">true</key>
+			<key name="SlotsVintageHighLimit" type="bool">true</key>
+			<key name="SlotsVintageHighRoller" type="bool">true</key>
+			<key name="SlotsWildAfrica" type="bool">true</key>
+			<key name="SlotsWildAfricaHighLimit" type="bool">true</key>
+			<key name="SlotsWildAfricaHighRoller" type="bool">true</key>
+			<key name="SlotsWildAnimals" type="bool">true</key>
+			<key name="SlotsWildAnimalsCustom" type="bool">true</key>
+			<key name="SlotsWildAnimalsHighLimit" type="bool">true</key>
+			<key name="SlotsWildAnimalsHighRoller" type="bool">true</key>
+			<key name="SlotsWildStars" type="bool">true</key>
+			<key name="SlotsWildStarsHighRoller" type="bool">true</key>
+			<key name="SlotsWildStarsPro" type="bool">true</key>
+			<key name="SlotsWildWest" type="bool">true</key>
+			<key name="SlotsWildWestHighRoller" type="bool">true</key>
+			<key name="SlotsWildWestPro" type="bool">true</key>
+			<key name="SlotsWonderland" type="bool">true</key>
+			<key name="SlotsWonderlandHighRoller" type="bool">true</key>
+			<key name="SlotsWonderlandPro" type="bool">true</key>
+			<key name="SlotsZeus" type="bool">true</key>
+			<key name="SlotsZeusHighLimit" type="bool">true</key>
+			<key name="SlotsZeusHighRoller" type="bool">true</key>
+		</node>
+		<node name="player">
+			<key name="chips" type="int">5366695</key>
+			<key name="diamonds" type="int">0</key>
+			<key name="ftue" type="bool">false</key>
+			<key name="in_app_completed" type="bool">true</key>
+			<key name="in_app_purchases_counter" type="int">3</key>
+			<key name="last_shop_multiplier_shown" type="int">4</key>
+			<key name="level_range" type="string">0000-INF.</key>
+			<key name="level_range_axgroup" type="string"></key>
+			<key name="lobby_bonus" type="int">100000</key>
+			<key name="lost_rounds_since_ad" type="int">0</key>
+			<key name="lost_rounds_since_ad_hint" type="int">0</key>
+			<key name="multipliers" type="string">6/6/3.2/3.2/3.2/7.5e-05/12/6/0.225/0.225/0.225/1</key>
+			<key name="rounds_since_ad" type="int">0</key>
+			<key name="rounds_since_ad_hint" type="int">0</key>
+			<node name="clubs">
+				<key name="clubJoinHelp" type="bool">true</key>
+				<key name="lastClubId" type="int">1104093</key>
+				<key name="last_wall_msg_id" type="int">5035</key>
+				<key name="leaguesWelcomeShown" type="bool">true</key>
+				<key name="messagesRead" type="int">0</key>
+				<key name="notifMessagesRead" type="int">0</key>
+			</node>
+			<node name="lottery">
+				<key name="secondTime" type="bool">false</key>
+			</node>
+		</node>
+		<node name="po">
+			<node name="igp">
+				<key name="id" type="int">1011458</key>
+				<key name="time" type="int">1607173496</key>
+			</node>
+		</node>
+		<node name="progress">
+			<key name="missions_completed" type="bool">true</key>
+		</node>
+		<node name="promo">
+			<node name="174393">
+				<node name="1">
+					<key name="displays" type="int">1</key>
+				</node>
+			</node>
+			<node name="31062">
+				<node name="20">
+					<key name="time" type="int">1504971976</key>
+				</node>
+			</node>
+			<node name="31079">
+				<node name="9">
+					<key name="time" type="int">1504971986</key>
+				</node>
+			</node>
+			<node name="31225">
+				<node name="3">
+					<key name="time" type="int">1504972069</key>
+				</node>
+			</node>
+		</node>
+		<node name="push_notif">
+			<key name="enabled" type="bool">false</key>
+			<node name="hourly_bonus">
+				<key name="collect_cnt" type="int">0</key>
+				<key name="last_notify_date" type="int">0</key>
+			</node>
+		</node>
+		<node name="settings">
+			<key name="ax_lang_group" type="int">0</key>
+			<key name="disp_language" type="string">pl</key>
+			<key name="language" type="string">pl</key>
+			<key name="music_volume" type="float">0.000000</key>
+			<key name="round_vibra" type="bool">true</key>
+			<key name="sound_volume" type="float">0.434259</key>
+			<key name="texas_music_volume" type="float">0.000000</key>
+			<key name="ui_language" type="string">pl</key>
+			<key name="vo_enabled" type="bool">false</key>
+		</node>
+		<node name="splash">
+			<key name="hintDisabled" type="bool">true</key>
+			<key name="isTutorialSkip" type="bool">false</key>
+			<key name="languageScreenDone" type="bool">true</key>
+			<key name="lastLoadingString" type="int">16</key>
+		</node>
+		<node name="tips">
+			<key name="notification_dismiss_tip_displayed" type="bool">true</key>
+		</node>
+		<node name="usconsent">
+			<key name="accepted" type="bool">false</key>
+		</node>
+		<node name="userSpecific">
+			<node name="collectibles">
+				<node name="3">
+					<node name="newItems">
+						<node name="1">
+							<key name="1" type="bool">true</key>
+							<key name="9" type="bool">true</key>
+						</node>
+						<node name="2">
+							<key name="11" type="bool">true</key>
+							<key name="13" type="bool">true</key>
+							<key name="15" type="bool">true</key>
+							<key name="17" type="bool">true</key>
+						</node>
+						<node name="3">
+							<key name="23" type="bool">true</key>
+						</node>
+						<node name="4">
+							<key name="33" type="bool">true</key>
+							<key name="35" type="bool">true</key>
+						</node>
+						<node name="5">
+							<key name="42" type="bool">true</key>
+							<key name="43" type="bool">true</key>
+						</node>
+					</node>
+					<node name="newSets">
+						<key name="1" type="bool">true</key>
+						<key name="2" type="bool">true</key>
+						<key name="3" type="bool">true</key>
+						<key name="4" type="bool">true</key>
+						<key name="5" type="bool">true</key>
+					</node>
+				</node>
+				<node name="4">
+					<node name="newItems">
+						<node name="1">
+							<key name="4" type="bool">true</key>
+							<key name="9" type="bool">true</key>
+						</node>
+						<node name="13">
+							<key name="122" type="bool">true</key>
+						</node>
+						<node name="16">
+							<key name="155" type="bool">true</key>
+						</node>
+						<node name="3">
+							<key name="22" type="bool">true</key>
+						</node>
+						<node name="5">
+							<key name="42" type="bool">true</key>
+							<key name="46" type="bool">true</key>
+						</node>
+						<node name="6">
+							<key name="54" type="bool">true</key>
+						</node>
+						<node name="8">
+							<key name="75" type="bool">true</key>
+						</node>
+						<node name="9">
+							<key name="81" type="bool">true</key>
+						</node>
+					</node>
+					<node name="newSets">
+						<key name="1" type="bool">true</key>
+						<key name="13" type="bool">true</key>
+						<key name="16" type="bool">true</key>
+						<key name="3" type="bool">true</key>
+						<key name="5" type="bool">true</key>
+						<key name="6" type="bool">true</key>
+						<key name="8" type="bool">true</key>
+						<key name="9" type="bool">true</key>
+					</node>
+				</node>
+				<node name="newThemes">
+					<key name="3" type="bool">true</key>
+					<key name="4" type="bool">true</key>
+				</node>
+				<node name="tutorial">
+					<node name="3">
+					</node>
+				</node>
+			</node>
+		</node>
+		<node name="vault">
+			<key name="info_popup_shown" type="bool">true</key>
+			<key name="tutorial_shown" type="bool">true</key>
+		</node>
+		<node name="workout">
+			<key name="static_tutorial_shown" type="bool">true</key>
+			<key name="tutorial_shown" type="bool">true</key>
+		</node>
+	</node>
+</registry>
