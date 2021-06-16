@@ -1,0 +1,24 @@
+function patch_save() {
+	source "$WORK_DIR/.settings"
+	save_file="$GAME_DIR/files/save/save"
+
+	check_video_str='<node name="workout">'
+	while read s; do
+	if [ "$s" == "$check_video_str" ]; then
+		is_video_off=1
+	else
+		is_video_off=0
+	fi
+	done < "$save_file""1"
+	if [ $is_video_off == 1 ]; then
+		echo "video disabled in this save"
+		exit
+	else
+		workout="		<node name="vault">\n			<key name="tutorial_shown" type="bool">true</key>\n		</node>\n			<node name=\"workout\">\n			<key name=\"static_tutorial_shown\" type=\"bool\">true</key>\n			<key name=\"tutorial_shown\" type=\"bool\">true</key>\n		</node>\n	</node>\n</registry>"
+		for i in $(seq 1 2); do sed -i '$d' "$save_file""1"; done;
+		printf "$workout" >> "$save_file""1"
+		for i in $(seq 1 2); do sed -i '$d' "$save_file""2"; done;
+		printf "$workout" >> "$save_file""2"
+	fi
+}
+

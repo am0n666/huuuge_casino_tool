@@ -10,6 +10,7 @@ function restore_profile() {
     . "$SCRIPTS_DIR/tar_progress"
     . "$SCRIPTS_DIR/write_bkp_info"
 	. "$SCRIPTS_DIR/get_player_club_id"
+	. "$SCRIPTS_DIR/patch_save"
 
     kill_game
 
@@ -23,10 +24,10 @@ function restore_profile() {
         rm -rf *
         tar_unpack "$BACKUP_FILE_PATH" "$TARGET_DIR_PATH"
         if [ "$DEFAULT_GAME" == "com.huuuge.casino.slots" ]; then
-            if [ -f "$GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar" ]; then
+            if [ -f "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" ]; then
                 rm -rf "$GAME_DIR/files/save/paks"
                 rm -rf "$GAME_DIR/files/save/trpaks"
-                tar xf "$GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar" -C "$GAME_DIR"
+                tar xf "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" -C "$GAME_DIR"
             fi
         fi
         chown -R "$GAME_USER":"$GAME_USER" "$TARGET_DIR_PATH"
