@@ -10,7 +10,6 @@ function restore_profile() {
     . "$SCRIPTS_DIR/tar_progress"
     . "$SCRIPTS_DIR/write_bkp_info"
 	. "$SCRIPTS_DIR/get_player_club_id"
-	. "$SCRIPTS_DIR/patch_save"
 
     kill_game
 
