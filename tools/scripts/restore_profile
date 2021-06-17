@@ -23,8 +23,8 @@ function restore_profile() {
         cd "$TARGET_DIR_PATH"
         rm -rf *
         tar_unpack "$BACKUP_FILE_PATH" "$TARGET_DIR_PATH"
-        patch_save 1
-        patch_save 2
+#        patch_save 1
+#        patch_save 2
         if [ "$DEFAULT_GAME" == "com.huuuge.casino.slots" ]; then
             if [ -f "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" ]; then
                 rm -rf "$GAME_DIR/files/save/paks"
