@@ -1,22 +1,22 @@
 function get_player_club_id() {
-    save_file="$1"
+	save_file="$1"
 
-    str_line_num="$(awk 'match($0,v){print NR; exit}' v="lastClubId" $save_file)"
+	str_line_num="$(awk 'match($0,v){print NR; exit}' v="lastClubId" $save_file)"
 
-    if [ -z "$str_line_num" ]; then
-        echo "0"
-    else
-        char1='<key name="lastClubId" type="int">'
-        char2='</key>'
+	if [ -z "$str_line_num" ]; then
+		echo "0"
+	else
+		char1='<key name="lastClubId" type="int">'
+		char2='</key>'
 
-        n=1
-        while read line; do
-            if [ "$n" == "$str_line_num" ]; then
-                full_line="$line"
-            fi
-            n=$((n + 1))
-        done <"$save_file"
-        str_club_id="$(echo "$full_line" | awk -v FS="($char1|$char2)" '{print $2}')"
-        echo "$str_club_id"
-    fi
+		n=1
+		while read line; do
+			if [ "$n" == "$str_line_num" ]; then
+				full_line="$line"
+			fi
+			n=$((n + 1))
+		done <"$save_file"
+		str_club_id="$(echo "$full_line" | awk -v FS="($char1|$char2)" '{print $2}')"
+		echo "$str_club_id"
+	fi
 }

@@ -1,4 +1,4 @@
 function del_tmp() {
-    source "$WORK_DIR/.settings"
-    rm -rf "$TEMP_FILES_PATH"
+	source "$WORK_DIR/.settings"
+	rm -rf "$TEMP_FILES_PATH"
 }

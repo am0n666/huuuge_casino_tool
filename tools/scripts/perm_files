@@ -1,12 +1,12 @@
 function perm_files() {
-    if [ $# != 2 ]; then
-        echo "Usage: perm_files <target_directory> <mode>"
-    else
-        _dir_="$1"
-        if [ -d "$_dir_" ]; then
-            find "$_dir_" -type f -exec chmod "$2" {} +
-        else
-            echo "Dir: $_dir_ not found"
-        fi
-    fi
+	if [ $# != 2 ]; then
+		echo "Usage: perm_files <target_directory> <mode>"
+	else
+		_dir_="$1"
+		if [ -d "$_dir_" ]; then
+			find "$_dir_" -type f -exec chmod "$2" {} +
+		else
+			echo "Dir: $_dir_ not found"
+		fi
+	fi
 }

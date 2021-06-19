@@ -1,11 +1,11 @@
 kill_game() {
-    bb="$WORK_DIR/tools/bin/bb/$(uname -m)/busybox"
+	bb="$WORK_DIR/tools/bin/bb/$(uname -m)/busybox"
 
-    source "$WORK_DIR/.settings"
+	source "$WORK_DIR/.settings"
 
-    grep_output="$("$bb" pgrep "$GAME_NAME")"
+	grep_output="$("$bb" pgrep "$GAME_NAME")"
 
-    if [ -n "$grep_output" ]; then
-        kill -9 "$grep_output"
-    fi
+	if [ -n "$grep_output" ]; then
+		kill -9 "$grep_output"
+	fi
 }

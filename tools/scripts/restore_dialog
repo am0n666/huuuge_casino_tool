@@ -29,19 +29,19 @@ function restore_dialog() {
 	fi
 
 	if [ -f "$INPUT_DIR/.last_restored" ]; then
-		LAST_RESTORED="$(cat "$INPUT_DIR/.last_restored" )"
+		LAST_RESTORED="$(cat "$INPUT_DIR/.last_restored")"
 	else
 		LAST_RESTORED="-NONE-"
 	fi
 
 	cd "$INPUT_DIR"
-	for i in "$(ls *.tar)"; do echo "${i%%/}" >> "$tmp_profiles_list_file_"; done
+	for i in "$(ls *.tar)"; do echo "${i%%/}" >>"$tmp_profiles_list_file_"; done
 	cd "$OLDPWD"
 
 	OPTIONS=()
-	while read n s ; do
+	while read n s; do
 		OPTIONS+=($n "$s")
-	done < "$tmp_profiles_list_file_"
+	done <"$tmp_profiles_list_file_"
 
 	selected=$(dialog --menu "Last restored: $LAST_RESTORED" $y $x $z "${OPTIONS[@]}" 3>&2 2>&1 1>&3)
 	retv=$?
@@ -57,4 +57,3 @@ function restore_dialog() {
 		restore_profile "$PDIR" "$PNAME"
 	fi
 }
-

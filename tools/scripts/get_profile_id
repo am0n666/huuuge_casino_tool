@@ -1,7 +1,7 @@
 function get_profile_id() {
-    source "$WORK_DIR/.settings"
+	source "$WORK_DIR/.settings"
 
-    ID_FROM_FILE="$(cat "$GAME_DIR/files/breakpad/data")"
-    RESULT_ID="$(echo "$ID_FROM_FILE" | awk -F"[" '{print $2}' | awk -F"]" '{print $1}')"
-    echo "$RESULT_ID"
+	ID_FROM_FILE="$(cat "$GAME_DIR/files/breakpad/data")"
+	RESULT_ID="$(echo "$ID_FROM_FILE" | awk -F"[" '{print $2}' | awk -F"]" '{print $1}')"
+	echo "$RESULT_ID"
 }

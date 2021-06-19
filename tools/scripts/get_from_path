@@ -1,18 +1,18 @@
 function get_from_path() {
-    [[ $# != 2 ]] && echo "usage: get_from_path <path> <dir|name|fullname|ext>" && return
-    theFullFilePath="$1"
-    theFileName=$(basename "$theFullFilePath")
-    extension=$([[ $theFileName == *.* ]] && echo ".${theFileName##*.}" || echo '')
-    # a hidden file without extenson?
-    if [ "${theFileName}" = "${extension}" ]; then
-        # hidden file without extension.  Fixup.
-        name=${theFileName}
-        extension=""
-    fi
-    case "$2" in
-     dir) echo "${theFullFilePath%/*}"  ;;
-     name) echo "${theFileName%.*}"  ;;
-     fullname) echo "${theFileName}"  ;;
-     ext) echo "${extension}"  ;;
-    esac
+	[[ $# != 2 ]] && echo "usage: get_from_path <path> <dir|name|fullname|ext>" && return
+	theFullFilePath="$1"
+	theFileName=$(basename "$theFullFilePath")
+	extension=$([[ $theFileName == *.* ]] && echo ".${theFileName##*.}" || echo '')
+	# a hidden file without extenson?
+	if [ "${theFileName}" = "${extension}" ]; then
+		# hidden file without extension.  Fixup.
+		name=${theFileName}
+		extension=""
+	fi
+	case "$2" in
+	dir) echo "${theFullFilePath%/*}" ;;
+	name) echo "${theFileName%.*}" ;;
+	fullname) echo "${theFileName}" ;;
+	ext) echo "${extension}" ;;
+	esac
 }

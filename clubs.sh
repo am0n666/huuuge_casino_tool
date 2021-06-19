@@ -44,31 +44,9 @@ function nout() {
         "$@" >/dev/null  2>&1
 }
 
-function print_usage() {
-    echo "Usage:"
-    echo "clubs.sh download"
-    echo "clubs.sh upload"
-    echo "clubs.sh sync"
-}
-
-if [ ! -n "$1" ]; then
-    print_usage
-    exit
-fi
-
-cmd="$1"
-
-if [ $cmd = "download" ]; then
-    download_clubs
-elif [ $cmd = "upload" ]; then
-    upload_clubs
-elif [ $cmd = "sync" ]; then
-    echo ""
-    echo "Synchronization of clubs, please wait"
-    nout upload_clubs
-    nout download_clubs
-    echo "Done."
-    echo ""
-else
-    print_usage
-fi
+echo ""
+echo "Synchronization of clubs, please wait"
+nout upload_clubs
+nout download_clubs
+echo "Done."
+echo ""

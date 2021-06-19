@@ -1,5 +1,5 @@
 start_game() {
-    source "$WORK_DIR/.settings"
-    . "$SCRIPTS_DIR/nout"
-    nout am start -S -n "$GAME_NAME/com.huuuge.casino.BootActivity" --es args '"-v full -o /sdcard/test.vktrace"'
+	source "$WORK_DIR/.settings"
+	. "$SCRIPTS_DIR/nout"
+	nout am start -S -n "$GAME_NAME/com.huuuge.casino.BootActivity" --es args '"-v full -o /sdcard/test.vktrace"'
 }

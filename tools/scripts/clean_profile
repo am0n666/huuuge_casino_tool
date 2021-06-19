@@ -1,35 +1,35 @@
 function clean_cache() {
-    source "$WORK_DIR/.settings"
-    source "$WORK_DIR/tools/default_dettings"
+	source "$WORK_DIR/.settings"
+	source "$WORK_DIR/tools/default_dettings"
 
-    if [ -d "$1" ]; then
-        rm -Rf "$GAME_CACHE_DIR"
-    fi
-    clear
+	if [ -d "$1" ]; then
+		rm -Rf "$GAME_CACHE_DIR"
+	fi
+	clear
 }
 
 function clean_profile() {
-    source "$WORK_DIR/.settings"
-    . "$SCRIPTS_DIR/kill_game"
+	source "$WORK_DIR/.settings"
+	. "$SCRIPTS_DIR/kill_game"
 
-    kill_game
+	kill_game
 
-    BACKUP_FILE_PATH="$WORK_DIR/tools/other/default_profile.tar"
-    TARGET_DIR_PATH="$GAME_DIR"
+	BACKUP_FILE_PATH="$WORK_DIR/tools/other/default_profile.tar"
+	TARGET_DIR_PATH="$GAME_DIR"
 
-    if [ -f "$BACKUP_FILE_PATH" ]; then
-        cd "$GAME_DIR"
-        rm -Rf *
-        (pv -n "$BACKUP_FILE_PATH" | tar xf - -C "$GAME_DIR") 2>&1
-        rm -f "$GAME_DIR/files/save/paks"
-        rm -f "$GAME_DIR/files/save/trpaks"
-        if [ -f "$GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar" ]; then
-            tar xf "$GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar" -C "$GAME_DIR"
-        fi
-        chown -R $GAME_USER:$GAME_USER "$GAME_DIR"
-        clean_cache
-        cd "$OLDPWD"
-    fi
-    clear
-    echo "Profile cleaned."
+	if [ -f "$BACKUP_FILE_PATH" ]; then
+		cd "$GAME_DIR"
+		rm -Rf *
+		(pv -n "$BACKUP_FILE_PATH" | tar xf - -C "$GAME_DIR") 2>&1
+		rm -f "$GAME_DIR/files/save/paks"
+		rm -f "$GAME_DIR/files/save/trpaks"
+		if [ -f "$GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar" ]; then
+			tar xf "$GAME_DATA_ACKUP_FOLDER_PATH/trpaks.tar" -C "$GAME_DIR"
+		fi
+		chown -R $GAME_USER:$GAME_USER "$GAME_DIR"
+		clean_cache
+		cd "$OLDPWD"
+	fi
+	clear
+	echo "Profile cleaned."
 }

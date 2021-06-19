@@ -1,23 +1,23 @@
 function backup_profile() {
-    source "$WORK_DIR/.settings"
-    . "$SCRIPTS_DIR/kill_game"
-    . "$SCRIPTS_DIR/remove_unwanted_files"
-    . "$SCRIPTS_DIR/convert_path"
-    . "$SCRIPTS_DIR/tar_progress"
+	source "$WORK_DIR/.settings"
+	. "$SCRIPTS_DIR/kill_game"
+	. "$SCRIPTS_DIR/remove_unwanted_files"
+	. "$SCRIPTS_DIR/convert_path"
+	. "$SCRIPTS_DIR/tar_progress"
 
-    kill_game
+	kill_game
 
-    if [ -n "$1" ] && [ -n "$2" ]; then
-        TARGET_DIR="$(convert_path "$1")"
-        PNAME="$2"
+	if [ -n "$1" ] && [ -n "$2" ]; then
+		TARGET_DIR="$(convert_path "$1")"
+		PNAME="$2"
 
-        if [ -e "$TARGET_DIR/$PNAME.tar" ]; then
-            rm -rf "$TARGET_DIR/$PNAME.tar"
-        fi
+		if [ -e "$TARGET_DIR/$PNAME.tar" ]; then
+			rm -rf "$TARGET_DIR/$PNAME.tar"
+		fi
 
-        SIZE="$(du -sk "$GAME_DIR" | cut -f 1)"
-        remove_unwanted_files
-        tar_create_archive "$GAME_DIR" "$TARGET_DIR/$PNAME.tar"
-        echo "$PNAME" >"$TARGET_DIR/.last_backuped"
-    fi
+		SIZE="$(du -sk "$GAME_DIR" | cut -f 1)"
+		remove_unwanted_files
+		tar_create_archive "$GAME_DIR" "$TARGET_DIR/$PNAME.tar"
+		echo "$PNAME" >"$TARGET_DIR/.last_backuped"
+	fi
 }

@@ -33,7 +33,7 @@ function restore_next() {
 				echo "No profiles in this directory"
 				exit
 			else
-				echo "00" > "$BKPS_DIR/.last_restored"
+				echo "00" >"$BKPS_DIR/.last_restored"
 				exit
 			fi
 		fi

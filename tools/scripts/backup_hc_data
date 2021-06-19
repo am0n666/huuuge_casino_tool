@@ -1,28 +1,28 @@
 function backup_hc_data() {
-    source "$WORK_DIR/.settings"
-    source "$WORK_DIR/tools/default_dettings"
-    . "$SCRIPTS_DIR/kill_game"
+	source "$WORK_DIR/.settings"
+	source "$WORK_DIR/tools/default_dettings"
+	. "$SCRIPTS_DIR/kill_game"
 
-    if [ ! -d "$GAME_DATA_BACKUP_FOLDER_PATH" ]; then
-        mkdir -p "$GAME_DATA_BACKUP_FOLDER_PATH"
-    fi
+	if [ ! -d "$GAME_DATA_BACKUP_FOLDER_PATH" ]; then
+		mkdir -p "$GAME_DATA_BACKUP_FOLDER_PATH"
+	fi
 
-    kill_game
+	kill_game
 
-    if [ -e "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" ]; then
-        rm -rf "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar"
-    fi
+	if [ -e "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" ]; then
+		rm -rf "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar"
+	fi
 
-    if [ -e "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" ]; then
-        rm -rf "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar"
-    fi
+	if [ -e "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" ]; then
+		rm -rf "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar"
+	fi
 
-    cd "$GAME_DIR"
-    tar cf "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" "files/save/paks" "files/save/trpaks"
-    cd "$OLDPWD"
-    cd "/sdcard/Android/data"
-    tar cf "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" "$GAME_NAME/files/assetcache/"
-    cd $OLDPWD
-    echolor -Y "Backup of game data created in: "
-    echolor -C "$GAME_DATA_BACKUP_FOLDER_PATH"
+	cd "$GAME_DIR"
+	tar cf "$GAME_DATA_BACKUP_FOLDER_PATH/trpaks.tar" "files/save/paks" "files/save/trpaks"
+	cd "$OLDPWD"
+	cd "/sdcard/Android/data"
+	tar cf "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" "$GAME_NAME/files/assetcache/"
+	cd $OLDPWD
+	echolor -Y "Backup of game data created in: "
+	echolor -C "$GAME_DATA_BACKUP_FOLDER_PATH"
 }
