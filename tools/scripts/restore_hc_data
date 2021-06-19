@@ -6,12 +6,12 @@ restore_hc_data() {
 	kill_game
 
 	if [ -e "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" ]; then
-		cd "/sdcard/Android/data"
-
 		if [ -e "/sdcard/Android/data/$GAME_NAME" ]; then
 			rm -Rf "/sdcard/Android/data/$GAME_NAME"
 		fi
-		tar xf "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar"
-		cd "$OLDPWD"
+		(pv -n "$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar" | tar xf - -C "/sdcard/Android/data") 2>&1 | dialog --gauge "Restoring huuuge casino data..." 6 50
+		clear
+		echolor -Y "Restoring huuuge casino data completed."
 	fi
 }
+
