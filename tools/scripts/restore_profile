@@ -1,7 +1,7 @@
 function restore_profile() {
-	_FILE1_="/data/data/com.huuuge.casino.slots/files/save/save1"
-	_FILE2_="/data/data/com.huuuge.casino.slots/files/breakpad/data"
 	source "$WORK_DIR/.settings"
+	_FILE1_="$GAME_DIR/files/save/save1"
+	_FILE2_="$GAME_DIR/files/breakpad/data"
 	source "$WORK_DIR/tools/default_dettings"
 	. "$SCRIPTS_DIR/kill_game"
 	. "$SCRIPTS_DIR/convert_path"
