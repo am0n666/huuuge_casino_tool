@@ -100,24 +100,25 @@ add_this='		<node name="userSpecific">
 	nout mkdir -p "$TEMP_FILES_PATH"
 	tmp_save_file="$TEMP_FILES_PATH/save$1_tmp"
 
-	lines_count=0
-	while read line; do
-		let lines_count++
-	done < "$save_file"
+#	lines_count=0
+#	while read line; do
+#		let lines_count++
+#	done < "$save_file"
 
-	find_str='<node name="userSpecific">'
+#	find_str='<node name="userSpecific">'
 
-	n=0
-	cut=0
-	while read line; do
-		if [ "$line" == "$find_str" ]; then
-			cut="$n"
-		fi
-		let n++
-	done < "$save_file"
+#	n=0
+#	cut=0
+#	while read line; do
+#		if [ "$line" == "$find_str" ]; then
+#			cut="$n"
+#		fi
+#		let n++
+#	done < "$save_file"
 
-	cut_lines=$(expr $lines_count - $cut)
-	head -n -$cut_lines "$save_file" > "$tmp_save_file"
+#	cut_lines=$(expr $lines_count - $cut)
+#	head -n -$cut_lines "$save_file" > "$tmp_save_file"
+	head -n -2 "$save_file" > "$tmp_save_file"
 	echo "$add_this" >> "$tmp_save_file"
 	cat "$tmp_save_file" > "$save_file"
 }

@@ -26,6 +26,18 @@ function restore_next() {
 			echolor -R "Directory: $BKPS_DIR not exists"
 			exit
 		fi
+
+		if [ ! -f "$BKPS_DIR/.last_restored" ]; then
+			profiles_count="$(find "$BKPS_DIR" -maxdepth 1 -type f -name "*.tar" | wc -l)"
+			if [ "$profiles_count" == 0 ]; then
+				echo "No profiles in this directory"
+				exit
+			else
+				echo "00" > "$BKPS_DIR/.last_restored"
+				exit
+			fi
+		fi
+
 		LR="$(cat "$BKPS_DIR/.last_restored")"
 		ONE=1
 		c="$(expr "$LR" + "$ONE")"
