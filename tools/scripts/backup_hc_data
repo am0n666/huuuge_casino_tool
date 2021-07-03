@@ -22,7 +22,7 @@ function backup_hc_data() {
 	cd "$OLDPWD"
 	SIZE="$(du -sk "/sdcard/Android/data/$GAME_NAME/files/assetcache" | cut -f 1)"
 	cd "/sdcard/Android/data"
-	(tar cfP - * | pv -n -s "${SIZE}k" >"$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar") 2>&1 | dialog --gauge 'Creating backup of huuuge casino data...' 6 50
+	(tar cfP - $GAME_NAME/* | pv -n -s "${SIZE}k" >"$GAME_DATA_BACKUP_FOLDER_PATH/hcdata.tar") 2>&1 | dialog --gauge 'Creating backup of huuuge casino data...' 6 50
 	cd $OLDPWD
 	clear
 	echolor -Y "Backup of game data created in: "

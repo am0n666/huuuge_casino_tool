@@ -1,4 +1,5 @@
 tools/_*
+_old_
 _clb_
 logs
 profiles
@@ -10,3 +11,4 @@ clb/
 clb_pis
 clb_pis/
 .last_restored
+_clubs_.txt
