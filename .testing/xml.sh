@@ -111,24 +111,75 @@ function get_player_id() {
 }
 
 list_club_ids_from_dir() {
-	pdir_list=$(convert_path "$1")
+   clubss="/data/data/com.termux/files/root/huuuge_casino_tool/clubs"
+	outf=$(convert_path "$1")
+	pdir_list=$(convert_path "$2")
 	if [ -f "$pdir_list/player_club_ids" ]
 	then
 		rm $pdir_list/player_club_ids
 	fi
 	temp_dir="`pwd`/tmpid.$$"
-	mkdir "$temp_dir"
+	mkdir -p "$temp_dir"
+	noo=1
 	for file in $pdir_list/*.tar
 	do
 		file_from="$file"
 		cd $temp_dir
 		tar -xf "$file_from" files/save/save1
 		_result_=$(get_player_club_id "$temp_dir/files/save/save1")
-		echo $_result_ >> $pdir_list/club_ids
+		clna="$(cat $clubss/$_result_)"
+		echo "$noo - $clna" >> $outf
+		cd $OLDPWD
+		noo=$(expr $noo + 1)
 	done
 	rm -rf $temp_dir
 }
 
+dir_list=(
+    _clb_/1/a
+    _clb_/1/b
+    _clb_/2/a
+    _clb_/2/b
+    _clb_/3/a
+    _clb_/3/b
+    _clb_/4/a
+    _clb_/5/a
+    _clb_/6/a
+    _clb_/7/a
+    _clb_/7/b
+    _clb_/8/a
+    _clb_/8/b
+    _clb_/9/a
+)
+
+curr="$PWD"
+bar="####################################################"
+out="$curr/_clubs_.txt"
+if [ -e "$out" ]; then
+rm -f "$out"
+fi
+
+for check_dir in ${dir_list[@]}; do
+
+echo $bar >> $out
+echo $check_dir >> $out
+echo $bar >> $out
+
+list_club_ids_from_dir $out $check_dir
+
+echo "" >> $out
+
+done
+
+
+
+
+
+
+
+
+
+function huj() {
 _FILE1_="/data/data/com.huuuge.casino.slots/files/save/save1"
 _FILE2_="/data/data/com.huuuge.casino.slots/files/breakpad/data"
 
@@ -150,3 +201,5 @@ fi
 #get_player_chips_count "$_FILE1_"
 #get_player_diamonds_count "$_FILE1_"
 #get_player_id "$_FILE2_"
+}
+
